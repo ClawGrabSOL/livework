@@ -342,6 +342,30 @@
   .bounty .stats .b .l { font-size: 9px; font-weight: 900; letter-spacing: 0.1em; color: var(--muted); }
   .bounty .stats .b .v { font-size: 14px; font-weight: 900; }
   .bounty .stats .b .v.sol { color: var(--black); }
+
+  /* SOL PRIZE BANNER */
+  .sol-banner {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--black); color: var(--white);
+    padding: 14px 16px;
+    margin: 0 0 14px;
+    border: 2px solid var(--black);
+  }
+  .sol-banner .left { display: flex; align-items: center; gap: 10px; }
+  .sol-banner .sol-coin {
+    width: 32px; height: 32px;
+    background: var(--white); color: var(--black);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 14px;
+    border: 2px solid var(--white);
+  }
+  .sol-banner .label { font-size: 10px; font-weight: 900; letter-spacing: 0.12em; opacity: 0.7; }
+  .sol-banner .amount { font-size: 22px; font-weight: 900; line-height: 1; margin-top: 2px; }
+  .sol-banner .amount .unit { font-size: 13px; opacity: 0.7; margin-left: 4px; }
+  .sol-banner .right { text-align: right; }
+  .sol-banner .right .label { display: block; }
+  .sol-banner .right .val { font-size: 13px; font-weight: 900; margin-top: 2px; }
   .bounty .foot {
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 16px; border-top: 2px solid var(--black);
@@ -557,8 +581,21 @@
           <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
           <h3>eat a ghost pepper live</h3>
           <div class="desc">Full pepper. No water for 60s. Stream-on-pump.fun required.</div>
+          <div class="sol-banner">
+            <div class="left">
+              <div class="sol-coin">◆</div>
+              <div>
+                <div class="label">PAYS OUT</div>
+                <div class="amount">29.99<span class="unit">SOL</span></div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="label">USD EST</div>
+              <div class="val">~$4,798</div>
+            </div>
+          </div>
           <div class="stats">
-            <div class="b"><div class="l">PRIZE</div><div class="v sol">29.99 SOL</div></div>
+            <div class="b"><div class="l">TOKEN</div><div class="v sol">$LIVEWORK</div></div>
             <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
@@ -579,8 +616,21 @@
           <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
           <h3>1000 pushups on stream</h3>
           <div class="desc">No edits. Continuous timer. Chat counts every rep.</div>
+          <div class="sol-banner">
+            <div class="left">
+              <div class="sol-coin">◆</div>
+              <div>
+                <div class="label">PAYS OUT</div>
+                <div class="amount">42<span class="unit">SOL</span></div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="label">USD EST</div>
+              <div class="val">~$6,720</div>
+            </div>
+          </div>
           <div class="stats">
-            <div class="b"><div class="l">PRIZE</div><div class="v sol">42 SOL</div></div>
+            <div class="b"><div class="l">TOKEN</div><div class="v sol">$LIVEWORK</div></div>
             <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
@@ -601,8 +651,21 @@
           <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
           <h3>ice bath until shaking</h3>
           <div class="desc">Submerge to neck. Visible thermometer. Until uncontrolled shivers.</div>
+          <div class="sol-banner">
+            <div class="left">
+              <div class="sol-coin">◆</div>
+              <div>
+                <div class="label">PAYS OUT</div>
+                <div class="amount">15<span class="unit">SOL</span></div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="label">USD EST</div>
+              <div class="val">~$2,400</div>
+            </div>
+          </div>
           <div class="stats">
-            <div class="b"><div class="l">PRIZE</div><div class="v sol">15 SOL</div></div>
+            <div class="b"><div class="l">TOKEN</div><div class="v sol">$LIVEWORK</div></div>
             <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
