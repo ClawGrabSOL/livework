@@ -1,11 +1,13 @@
-# LIVEWORK
+# STREAMWORK
 
 **Stream. Complete. Earn SOL.**
 
-LIVEWORK is the live-stream bounty board for Solana. Open a pump.fun livestream under the **$LIVEWORK** token, complete the bounty on cam, and the smart-contract releases SOL the instant the team signs off.
+STREAMWORK is the live-stream bounty board for Solana. Open a pump.fun livestream under the **$STREAMWORK** token, complete the bounty on cam, and the smart-contract releases SOL the instant the team signs off.
 
 - 🎥 Live-only bounties (no edited clips)
 - 🪙 Paid in **SOLANA**
+- 🔴 LIVE tab — see who's streaming right now
+- 👛 Connect Wallet (Phantom, Solflare, Backpack, Glow)
 - 🚀 Powered by **pump.fun**
 
 ## Run locally
