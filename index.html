@@ -9,8 +9,8 @@
 <link rel="apple-touch-icon" href="logo.png" />
 <style>
   :root {
-    --red: #ed1c24;
-    --red-2: #c5151c;
+    --red: #0a0a0a;
+    --red-2: #000000;
     --black: #0a0a0a;
     --white: #ffffff;
     --gray: #f2f2f2;
@@ -49,9 +49,9 @@
   nav.top .brand img { width: 36px; height: 36px; object-fit: contain; }
   nav.top .brand .name { font-weight: 900; font-size: 20px; letter-spacing: -0.02em; }
   nav.top .links { display: flex; gap: 28px; font-weight: 700; font-size: 14px; }
-  nav.top .links a:hover { color: var(--red); }
+  nav.top .links a:hover { text-decoration: underline; }
   nav.top .select-wallet {
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     padding: 10px 18px;
     font-weight: 800;
@@ -59,7 +59,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  nav.top .select-wallet:hover { background: var(--red-2); }
+  nav.top .select-wallet:hover { background: #333; }
 
   /* TICKER */
   .ticker {
@@ -80,8 +80,8 @@
     padding-left: 100%;
   }
   .ticker .item { padding: 0 18px; }
-  .ticker .sep { color: var(--red); }
-  .ticker .sol { color: var(--red); }
+  .ticker .sep { color: #fff; opacity: 0.5; }
+  .ticker .sol { color: #fff; }
   @keyframes scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-100%); }
@@ -89,7 +89,7 @@
 
   /* HERO */
   .hero {
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     padding: 56px 0 56px;
     position: relative;
@@ -100,7 +100,7 @@
     position: absolute;
     inset: 0;
     background-image:
-      repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 14px);
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 14px);
     pointer-events: none;
   }
   .hero .inner {
@@ -117,7 +117,7 @@
     letter-spacing: -0.02em;
     margin-bottom: 18px;
   }
-  .hero h1 .b { color: var(--black); }
+  .hero h1 .b { color: var(--white); opacity: 0.55; }
   .hero .sub {
     font-size: 16px;
     font-weight: 600;
@@ -159,7 +159,7 @@
     flex-shrink: 0;
   }
   .hero-card .av img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-card .top .label { color: var(--red); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
+  .hero-card .top .label { color: var(--black); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
   .hero-card .top .h { font-weight: 800; font-size: 15px; line-height: 1.2; margin-top: 2px; }
   .hero-card .head-row {
     background: var(--black);
@@ -178,12 +178,12 @@
     font-size: 14px;
   }
   .hero-card .row:last-child { border-bottom: none; }
-  .hero-card .row .sol { color: var(--red); font-weight: 900; }
+  .hero-card .row .sol { color: var(--black); font-weight: 900; }
   .live-dot {
     display: inline-block;
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--red);
+    background: var(--black);
     margin-right: 6px;
     animation: pulse 1.2s infinite;
   }
@@ -201,7 +201,7 @@
     align-items: stretch;
   }
   .lore-title {
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     padding: 30px;
     display: flex;
@@ -218,13 +218,13 @@
     font-size: 14px;
     line-height: 1.55;
   }
-  .lore-body .top-box .em { color: var(--red); font-weight: 800; }
+  .lore-body .top-box .em { color: var(--black); font-weight: 900; text-decoration: underline; }
   .lore-body .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .lore-body .row-2 .box {
     border: 2px solid var(--black);
     padding: 18px;
   }
-  .lore-body .box .k { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; color: var(--red); margin-bottom: 8px; }
+  .lore-body .box .k { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; color: var(--black); margin-bottom: 8px; }
   .lore-body .box p { font-size: 13px; line-height: 1.55; }
 
   /* HOW IT WORKS */
@@ -245,7 +245,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .how .start-btn:hover { background: var(--red); }
+  .how .start-btn:hover { background: #333; }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .step {
     border: 2px solid var(--black);
@@ -256,7 +256,7 @@
     justify-content: space-between;
   }
   .step .num {
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     width: 30px; height: 30px;
     display: flex; align-items: center; justify-content: center;
@@ -273,7 +273,7 @@
   }
   .bounties h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.02em; }
   .bounties .view-all {
-    background: var(--red);
+    background: var(--black);
     color: var(--white);
     padding: 10px 20px;
     font-weight: 900;
@@ -281,7 +281,7 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
-  .bounties .view-all:hover { background: var(--red-2); }
+  .bounties .view-all:hover { background: #333; }
   .bounty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .bounty {
     background: var(--white);
@@ -304,8 +304,8 @@
   .bounty .thumb .live-tag {
     position: absolute;
     top: 10px; left: 10px;
-    background: var(--red);
-    color: var(--white);
+    background: var(--white);
+    color: var(--black);
     padding: 4px 10px;
     font-size: 11px;
     font-weight: 900;
@@ -338,7 +338,7 @@
   }
   .bounty .stats .b .l { font-size: 9px; font-weight: 900; letter-spacing: 0.1em; color: var(--muted); }
   .bounty .stats .b .v { font-size: 14px; font-weight: 900; }
-  .bounty .stats .b .v.sol { color: var(--red); }
+  .bounty .stats .b .v.sol { color: var(--black); }
   .bounty .foot {
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 16px; border-top: 2px solid var(--black);
@@ -350,7 +350,7 @@
     font-weight: 900; font-size: 11px; letter-spacing: 0.08em;
     text-transform: uppercase;
   }
-  .bounty .foot .go:hover { background: var(--red); }
+  .bounty .foot .go:hover { background: #333; }
 
   /* CTA */
   .cta {
@@ -365,7 +365,7 @@
     align-items: center;
     gap: 24px;
   }
-  .cta .kicker { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .cta .kicker { color: var(--white); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; opacity: 0.6; }
   .cta h2 { font-size: clamp(28px, 4.5vw, 48px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; max-width: 760px; }
   .cta .launch {
     background: var(--white);
@@ -377,7 +377,7 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .cta .launch:hover { background: var(--red); color: var(--white); }
+  .cta .launch:hover { background: var(--black); color: var(--white); border: 2px solid var(--white); }
 
   /* FOOTER */
   footer {
@@ -391,7 +391,7 @@
   footer .left { display: flex; align-items: center; gap: 8px; font-weight: 800; }
   footer .left img { width: 22px; height: 22px; object-fit: contain; }
   footer .right { display: flex; gap: 20px; font-weight: 700; }
-  footer .right a:hover { color: var(--red); }
+  footer .right a:hover { color: var(--black); text-decoration: underline; }
 
   @media (max-width: 880px) {
     nav.top .links { display: none; }
@@ -544,7 +544,7 @@
     <div class="bounty-grid">
       <!-- Bounty 1 -->
       <div class="bounty">
-        <div class="thumb" style="background:linear-gradient(135deg,#ed1c24,#7a0a0e);">
+        <div class="thumb" style="background:linear-gradient(135deg,#1a1a1a,#000);">
           <div class="ph">🌶️</div>
           <div class="live-tag">⬤ LIVE</div>
           <div class="viewers">👁 2,418</div>
@@ -588,7 +588,7 @@
 
       <!-- Bounty 3 -->
       <div class="bounty">
-        <div class="thumb" style="background:linear-gradient(135deg,#4ea8ff,#1a4a8a);">
+        <div class="thumb" style="background:linear-gradient(135deg,#2a2a2a,#000);">
           <div class="ph">🥶</div>
           <div class="live-tag">⬤ LIVE</div>
           <div class="viewers">👁 1,205</div>
