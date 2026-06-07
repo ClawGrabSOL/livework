@@ -230,6 +230,8 @@
 
   /* HOW IT WORKS */
   .how { padding: 60px 0; }
+  .cap-note { margin-top: 24px; padding: 14px 18px; border: 2px solid var(--black); background: var(--gray); font-size: 13px; font-weight: 700; letter-spacing: 0.02em; text-align: center; }
+  .cap-note strong { background: var(--black); color: var(--white); padding: 2px 8px; }
   .how .head {
     display: flex;
     align-items: center;
@@ -459,7 +461,7 @@
           <div class="h">Stream the proof. Get paid the SOL.</div>
         </div>
       </div>
-      <div class="head-row">ACTIVE BOUNTIES</div>
+      <div class="head-row">ACTIVE BOUNTIES · 24H CAP</div>
       <div class="row"><span><span class="live-dot"></span>stream 24h non-stop</span><span class="sol">100 SOL</span></div>
       <div class="row"><span><span class="live-dot"></span>do 1000 pushups on stream</span><span class="sol">42 SOL</span></div>
       <div class="row"><span><span class="live-dot"></span>eat a ghost pepper live</span><span class="sol">29.99 SOL</span></div>
@@ -532,6 +534,7 @@
         <h3>Team verifies the proof and the smart-contract releases your SOL</h3>
       </div>
     </div>
+    <div class="cap-note">⏱️ Every challenge has a <strong>24-hour cap</strong> from the moment it goes live. Miss the window, the bounty expires.</div>
   </div>
 </section>
 
@@ -556,7 +559,7 @@
           <div class="desc">Full pepper. No water for 60s. Stream-on-pump.fun required.</div>
           <div class="stats">
             <div class="b"><div class="l">PRIZE</div><div class="v sol">29.99 SOL</div></div>
-            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+            <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
         <div class="foot">
@@ -578,7 +581,7 @@
           <div class="desc">No edits. Continuous timer. Chat counts every rep.</div>
           <div class="stats">
             <div class="b"><div class="l">PRIZE</div><div class="v sol">42 SOL</div></div>
-            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+            <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
         <div class="foot">
@@ -600,7 +603,7 @@
           <div class="desc">Submerge to neck. Visible thermometer. Until uncontrolled shivers.</div>
           <div class="stats">
             <div class="b"><div class="l">PRIZE</div><div class="v sol">15 SOL</div></div>
-            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+            <div class="b"><div class="l">CAP</div><div class="v" data-countdown>24h 00m left</div></div>
           </div>
         </div>
         <div class="foot">
@@ -638,5 +641,28 @@
   </div>
 </footer>
 
+<script>
+  // Live 24h countdown per bounty. Each card seeds from its position so they don't all
+  // hit zero at once, then loops every 24h.
+  (function() {
+    const els = document.querySelectorAll('[data-countdown]');
+    const ONE_DAY = 24 * 60 * 60 * 1000;
+    const seeds = [ONE_DAY - 47 * 60 * 1000, ONE_DAY - 3 * 60 * 60 * 1000 - 12 * 60 * 1000, ONE_DAY - 8 * 60 * 60 * 1000 - 31 * 60 * 1000];
+    const starts = Array.from(els).map((_, i) => Date.now() - (ONE_DAY - seeds[i % seeds.length]));
+    function tick() {
+      const now = Date.now();
+      els.forEach((el, i) => {
+        const elapsed = (now - starts[i]) % ONE_DAY;
+        const left = ONE_DAY - elapsed;
+        const h = Math.floor(left / 3600000);
+        const m = Math.floor((left % 3600000) / 60000);
+        const s = Math.floor((left % 60000) / 1000);
+        el.textContent = `${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+      });
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 </body>
 </html>
