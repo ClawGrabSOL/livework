@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LIVEWORK — Stream. Complete. Earn SOL.</title>
+<meta name="description" content="LIVEWORK is the live-stream bounty board. Open a pump.fun stream under the LIVEWORK token, complete challenges on cam, get paid in SOLANA." />
+<link rel="icon" type="image/png" href="logo.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<style>
+  :root {
+    --red: #ed1c24;
+    --red-2: #c5151c;
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --gray: #f2f2f2;
+    --line: #e5e5e5;
+    --muted: #6b6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--white);
+    color: var(--black);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  img { display: block; max-width: 100%; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav.top {
+    border-bottom: 2px solid var(--black);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  nav.top .inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.top .brand { display: flex; align-items: center; gap: 10px; }
+  nav.top .brand img { width: 36px; height: 36px; object-fit: contain; }
+  nav.top .brand .name { font-weight: 900; font-size: 20px; letter-spacing: -0.02em; }
+  nav.top .links { display: flex; gap: 28px; font-weight: 700; font-size: 14px; }
+  nav.top .links a:hover { color: var(--red); }
+  nav.top .select-wallet {
+    background: var(--red);
+    color: var(--white);
+    padding: 10px 18px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  nav.top .select-wallet:hover { background: var(--red-2); }
+
+  /* TICKER */
+  .ticker {
+    background: var(--black);
+    color: var(--white);
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 2px solid var(--black);
+    border-bottom: 2px solid var(--black);
+    padding: 10px 0;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .ticker .track {
+    display: inline-block;
+    animation: scroll 28s linear infinite;
+    padding-left: 100%;
+  }
+  .ticker .item { padding: 0 18px; }
+  .ticker .sep { color: var(--red); }
+  .ticker .sol { color: var(--red); }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--red);
+    color: var(--white);
+    padding: 56px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 14px);
+    pointer-events: none;
+  }
+  .hero .inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: start;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  .hero h1 .b { color: var(--black); }
+  .hero .sub {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    max-width: 520px;
+  }
+  .hero .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero .btn {
+    background: var(--black);
+    color: var(--white);
+    padding: 13px 22px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 2px solid var(--black);
+  }
+  .hero .btn:hover { background: var(--white); color: var(--black); }
+  .hero .btn.outline { background: transparent; color: var(--white); border-color: var(--white); }
+  .hero .btn.outline:hover { background: var(--white); color: var(--black); }
+
+  .hero-card {
+    background: var(--white);
+    color: var(--black);
+    border: 2px solid var(--black);
+    width: 100%;
+  }
+  .hero-card .top {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 2px solid var(--black);
+  }
+  .hero-card .av {
+    width: 46px; height: 46px;
+    border: 2px solid var(--black);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hero-card .av img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-card .top .label { color: var(--red); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
+  .hero-card .top .h { font-weight: 800; font-size: 15px; line-height: 1.2; margin-top: 2px; }
+  .hero-card .head-row {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+  .hero-card .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .hero-card .row:last-child { border-bottom: none; }
+  .hero-card .row .sol { color: var(--red); font-weight: 900; }
+  .live-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-right: 6px;
+    animation: pulse 1.2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* LORE */
+  .lore { padding: 60px 0; background: var(--white); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
+  .lore .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+    align-items: stretch;
+  }
+  .lore-title {
+    background: var(--red);
+    color: var(--white);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid var(--black);
+  }
+  .lore-title .kicker { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .lore-title h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; }
+  .lore-body { display: flex; flex-direction: column; gap: 16px; }
+  .lore-body .top-box {
+    border: 2px solid var(--black);
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .lore-body .top-box .em { color: var(--red); font-weight: 800; }
+  .lore-body .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lore-body .row-2 .box {
+    border: 2px solid var(--black);
+    padding: 18px;
+  }
+  .lore-body .box .k { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; color: var(--red); margin-bottom: 8px; }
+  .lore-body .box p { font-size: 13px; line-height: 1.55; }
+
+  /* HOW IT WORKS */
+  .how { padding: 60px 0; }
+  .how .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .how h2 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; letter-spacing: -0.02em; }
+  .how .start-btn {
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 22px;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .how .start-btn:hover { background: var(--red); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .step {
+    border: 2px solid var(--black);
+    padding: 22px 18px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .step .num {
+    background: var(--red);
+    color: var(--white);
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 14px;
+    margin-bottom: 18px;
+  }
+  .step h3 { font-size: 17px; font-weight: 900; line-height: 1.3; }
+
+  /* BOUNTIES */
+  .bounties { padding: 50px 0 60px; background: var(--gray); border-top: 2px solid var(--black); }
+  .bounties .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 22px;
+  }
+  .bounties h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.02em; }
+  .bounties .view-all {
+    background: var(--red);
+    color: var(--white);
+    padding: 10px 20px;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .bounties .view-all:hover { background: var(--red-2); }
+  .bounty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bounty {
+    background: var(--white);
+    border: 2px solid var(--black);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .bounty .thumb {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: var(--black);
+    overflow: hidden;
+  }
+  .bounty .thumb .ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+  }
+  .bounty .thumb .live-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--red);
+    color: var(--white);
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  .bounty .thumb .viewers {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: var(--white);
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .bounty .meta { padding: 16px; }
+  .bounty .meta .small-row {
+    display: flex; justify-content: space-between;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .bounty .meta h3 { font-size: 16px; font-weight: 900; margin-bottom: 4px; line-height: 1.2; }
+  .bounty .meta .desc { font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.4; }
+  .bounty .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;
+  }
+  .bounty .stats .b {
+    border: 2px solid var(--black);
+    padding: 8px 10px;
+  }
+  .bounty .stats .b .l { font-size: 9px; font-weight: 900; letter-spacing: 0.1em; color: var(--muted); }
+  .bounty .stats .b .v { font-size: 14px; font-weight: 900; }
+  .bounty .stats .b .v.sol { color: var(--red); }
+  .bounty .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; border-top: 2px solid var(--black);
+  }
+  .bounty .foot .wallet { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 0.04em; }
+  .bounty .foot .go {
+    background: var(--black); color: var(--white);
+    padding: 8px 14px;
+    font-weight: 900; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .bounty .foot .go:hover { background: var(--red); }
+
+  /* CTA */
+  .cta {
+    background: var(--black);
+    color: var(--white);
+    padding: 50px 0;
+    border-top: 2px solid var(--black);
+  }
+  .cta .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+  .cta .kicker { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .cta h2 { font-size: clamp(28px, 4.5vw, 48px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; max-width: 760px; }
+  .cta .launch {
+    background: var(--white);
+    color: var(--black);
+    padding: 14px 22px;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .cta .launch:hover { background: var(--red); color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: var(--white);
+    padding: 24px 0;
+    border-top: 2px solid var(--black);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer .inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+  footer .left { display: flex; align-items: center; gap: 8px; font-weight: 800; }
+  footer .left img { width: 22px; height: 22px; object-fit: contain; }
+  footer .right { display: flex; gap: 20px; font-weight: 700; }
+  footer .right a:hover { color: var(--red); }
+
+  @media (max-width: 880px) {
+    nav.top .links { display: none; }
+    .hero .inner { grid-template-columns: 1fr; }
+    .lore .grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .bounty-grid { grid-template-columns: 1fr; }
+    .cta .inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <div class="brand">
+      <img src="logo.png" alt="LIVEWORK logo" />
+      <div class="name">LIVEWORK</div>
+    </div>
+    <div class="links">
+      <a href="#bounties">BOUNTIES</a>
+      <a href="#">DASHBOARD</a>
+      <a href="#">X</a>
+    </div>
+    <button class="select-wallet">Select Wallet</button>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="track">
+    <span class="item">eat a ghost pepper live</span><span class="sep">///</span>
+    <span class="item">29.99 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">ice bath until shaking</span><span class="sep">///</span>
+    <span class="item">15 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">do 1000 pushups on stream</span><span class="sep">///</span>
+    <span class="item">42 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">stream 24h non-stop</span><span class="sep">///</span>
+    <span class="item">100 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">drink 1 gallon of milk</span><span class="sep">///</span>
+    <span class="item">9.99 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">cold call 50 strangers live</span><span class="sep">///</span>
+    <span class="item">25 <span class="sol">SOL</span></span><span class="sep">///</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container inner">
+    <div>
+      <h1>Go live. <span class="b">Complete challenges.</span> Earn SOL.</h1>
+      <p class="sub">Open a pump.fun livestream under the <strong>$LIVEWORK</strong> token, complete the bounty on cam, get paid in <strong>SOLANA</strong>. Real-time. On-chain. Unscripted.</p>
+      <div class="actions">
+        <button class="btn">Start Streaming</button>
+        <button class="btn outline">View Live Board</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="top">
+        <div class="av"><img src="logo.png" alt="" /></div>
+        <div>
+          <div class="label">⬤ LIVE BOUNTIES</div>
+          <div class="h">Stream the proof. Get paid the SOL.</div>
+        </div>
+      </div>
+      <div class="head-row">ACTIVE BOUNTIES</div>
+      <div class="row"><span><span class="live-dot"></span>stream 24h non-stop</span><span class="sol">100 SOL</span></div>
+      <div class="row"><span><span class="live-dot"></span>do 1000 pushups on stream</span><span class="sol">42 SOL</span></div>
+      <div class="row"><span><span class="live-dot"></span>eat a ghost pepper live</span><span class="sol">29.99 SOL</span></div>
+      <div class="row"><span><span class="live-dot"></span>cold call 50 strangers</span><span class="sol">25 SOL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER 2 -->
+<div class="ticker">
+  <div class="track">
+    <span class="item">stream 24h non-stop</span><span class="sep">///</span>
+    <span class="item">100 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">eat a ghost pepper live</span><span class="sep">///</span>
+    <span class="item">29.99 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">ice bath until shaking</span><span class="sep">///</span>
+    <span class="item">15 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">do 1000 pushups on stream</span><span class="sep">///</span>
+    <span class="item">42 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">drink 1 gallon of milk</span><span class="sep">///</span>
+    <span class="item">9.99 <span class="sol">SOL</span></span><span class="sep">///</span>
+    <span class="item">cold call 50 strangers live</span><span class="sep">///</span>
+    <span class="item">25 <span class="sol">SOL</span></span><span class="sep">///</span>
+  </div>
+</div>
+
+<!-- LORE -->
+<section class="lore">
+  <div class="container grid">
+    <div class="lore-title">
+      <div class="kicker">THE LORE</div>
+      <h2>Why we made this</h2>
+    </div>
+    <div class="lore-body">
+      <div class="top-box">
+        Pump.fun livestreams turned into the most-watched corner of Solana — but bounties stayed off-stream, off-chain, and off-vibe. We wanted a platform where <span class="em">every challenge happens on a live stream</span>, under the LIVEWORK token, with the SOL escrowed before the camera turns on. <span class="em">No proof, no payout.</span>
+      </div>
+      <div class="row-2">
+        <div class="box">
+          <div class="k">PROBLEM</div>
+          <p>Bounty boards reward edited clips. Streams get the attention but none of the rewards. The most viral moments earn $0.</p>
+        </div>
+        <div class="box">
+          <div class="k">ANSWER</div>
+          <p>Live-only bounties. Open a pump.fun stream on $LIVEWORK, complete the challenge on cam, and the smart-contract releases SOL the instant the team signs off.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="head">
+      <h2>How it works</h2>
+      <button class="start-btn">START →</button>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Open a pump.fun livestream under the $LIVEWORK token</h3>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Pick a bounty and complete the challenge live on camera</h3>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Team verifies the proof and the smart-contract releases your SOL</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUNTIES -->
+<section class="bounties" id="bounties">
+  <div class="container">
+    <div class="head">
+      <h2>Open bounties</h2>
+      <button class="view-all">View All</button>
+    </div>
+    <div class="bounty-grid">
+      <!-- Bounty 1 -->
+      <div class="bounty">
+        <div class="thumb" style="background:linear-gradient(135deg,#ed1c24,#7a0a0e);">
+          <div class="ph">🌶️</div>
+          <div class="live-tag">⬤ LIVE</div>
+          <div class="viewers">👁 2,418</div>
+        </div>
+        <div class="meta">
+          <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
+          <h3>eat a ghost pepper live</h3>
+          <div class="desc">Full pepper. No water for 60s. Stream-on-pump.fun required.</div>
+          <div class="stats">
+            <div class="b"><div class="l">PRIZE</div><div class="v sol">29.99 SOL</div></div>
+            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+          </div>
+        </div>
+        <div class="foot">
+          <div class="wallet">53kR…24Xx</div>
+          <button class="go">View Bounty</button>
+        </div>
+      </div>
+
+      <!-- Bounty 2 -->
+      <div class="bounty">
+        <div class="thumb" style="background:linear-gradient(135deg,#0a0a0a,#333);">
+          <div class="ph">💪</div>
+          <div class="live-tag">⬤ LIVE</div>
+          <div class="viewers">👁 5,902</div>
+        </div>
+        <div class="meta">
+          <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
+          <h3>1000 pushups on stream</h3>
+          <div class="desc">No edits. Continuous timer. Chat counts every rep.</div>
+          <div class="stats">
+            <div class="b"><div class="l">PRIZE</div><div class="v sol">42 SOL</div></div>
+            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+          </div>
+        </div>
+        <div class="foot">
+          <div class="wallet">9aP…7Yb1</div>
+          <button class="go">View Bounty</button>
+        </div>
+      </div>
+
+      <!-- Bounty 3 -->
+      <div class="bounty">
+        <div class="thumb" style="background:linear-gradient(135deg,#4ea8ff,#1a4a8a);">
+          <div class="ph">🥶</div>
+          <div class="live-tag">⬤ LIVE</div>
+          <div class="viewers">👁 1,205</div>
+        </div>
+        <div class="meta">
+          <div class="small-row"><span>SOL REWARD</span><span>0 PROOFS</span></div>
+          <h3>ice bath until shaking</h3>
+          <div class="desc">Submerge to neck. Visible thermometer. Until uncontrolled shivers.</div>
+          <div class="stats">
+            <div class="b"><div class="l">PRIZE</div><div class="v sol">15 SOL</div></div>
+            <div class="b"><div class="l">CLOCK</div><div class="v">1303d 19h left</div></div>
+          </div>
+        </div>
+        <div class="foot">
+          <div class="wallet">2zN…J19q</div>
+          <button class="go">View Bounty</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container inner">
+    <div>
+      <div class="kicker">$LIVEWORK</div>
+      <h2>Earn SOL by streaming bounties live on pump.fun.</h2>
+    </div>
+    <button class="launch">PUMP.FUN LAUNCH SOON →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container inner">
+    <div class="left">
+      <img src="logo.png" alt="LIVEWORK" />
+      <span>LIVEWORK © 2026 · stream. complete. earn.</span>
+    </div>
+    <div class="right">
+      <a href="#">X / Twitter</a>
+      <a href="#">pump.fun</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
