@@ -409,8 +409,8 @@
     <div class="links">
       <a href="#bounties">BOUNTIES</a>
       <a href="#how">HOW IT WORKS</a>
-      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">DASHBOARD</a>
-      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">X</a>
+      <a href="#">DASHBOARD</a>
+      <a href="#">X</a>
     </div>
     <button class="select-wallet" onclick="openWalletModal()">SELECT WALLET</button>
   </div>
@@ -515,7 +515,7 @@
   <div class="container">
     <div class="head">
       <h2>Bounties</h2>
-      <a class="view-all" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">View All</a>
+      <a class="view-all" href="#bounties">View All</a>
     </div>
 
     <div class="filters">
@@ -548,9 +548,8 @@
     <div>
       <div class="kicker">$PUMPROYALE</div>
       <h2>Two slots. One pot. Loser walks empty.</h2>
-      <div class="ca">CA: E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump</div>
     </div>
-    <a class="launch" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">BUY ON PUMP.FUN →</a>
+    <a class="launch" href="#bounties">ENTER THE ARENA →</a>
   </div>
 </section>
 
@@ -562,8 +561,7 @@
       <span>$PUMPROYALE © 2026 · duel. film. eat.</span>
     </div>
     <div class="right">
-      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">X / Twitter</a>
-      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">pump.fun</a>
+      <a href="#">X / Twitter</a>
       <a href="#">Terms</a>
     </div>
   </div>
@@ -585,8 +583,6 @@
 </div>
 
 <script>
-  const CA = "E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump";
-
   const BOUNTIES = [
     {
       title: "beat the shit out of someone",
@@ -651,10 +647,6 @@
     },
   ];
 
-  function caShort(ca) {
-    return "$" + ca.slice(0, 26).toUpperCase();
-  }
-
   function slotLabel(taken, side) {
     if (taken) return (side === 'blue' ? 'BLUE LOCKED' : 'RED LOCKED');
     return (side === 'blue' ? 'BLUE OPEN' : 'RED OPEN');
@@ -671,7 +663,7 @@
     grid.innerHTML = items.map(b => `
       <article class="bounty">
         <div class="ca-bar">
-          <span class="ca">${caShort(CA)}</span>
+          <span class="ca">${b.title.toUpperCase()}</span>
           <span class="open-tag ${b.status === 'dueling' ? 'dueling' : ''}">${b.status === 'dueling' ? 'DUEL LIVE' : 'OPEN'}</span>
         </div>
         <div class="thumb">
