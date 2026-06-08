@@ -1,14 +1,13 @@
-# $PUMPROYALE
+# $CRIMEWORK
 
-**The Duel Clash of the Bounties.**
+**Film the proof. Earn SOL.**
 
-PUMPROYALE is a 1v1 bounty arena on Solana. Two slots per bounty — blue challenger vs red rival. Both ante SOL. Both film a single-take video of the same absurd task. Fastest valid completion takes 100% of the pot. Loser walks empty.
+CRIMEWORK is the single-take bounty board on Solana. One person, one task, one continuous video. The smart contract releases your SOL the moment the proof clears.
 
-- ⚔️ 1v1 duel format (two slots: blue + red)
 - 🎬 Single-take video proof (no cuts, no edits)
-- 🔒 SOL escrowed in smart contract before the duel starts
-- 💀 Winner takes all — loser gets nothing
-- 🎯 Bounties include hair dryer toss, ice bath shiver-off, pushup races, ghost pepper, cold calls, gallon of milk
+- 💰 Paid in SOL
+- ⚫️⚪️ Black & white only
+- 🎯 Bounties: beat the shit out of someone, break a car mirror, scream the ticker at night, streak the Knicks game, eat a ghost pepper, ice bath shiver test
 
 ## Run locally
 
@@ -17,4 +16,4 @@ python -m http.server 8080
 # visit http://localhost:8080
 ```
 
-Pure static site — no build step.
+Pure static — no build step.

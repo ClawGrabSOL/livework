@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>$PUMPROYALE — The Duel Clash of the Bounties.</title>
-<meta name="description" content="PUMPROYALE is the 1v1 video bounty arena. Two slots per duel. Fastest to film the proof wins the SOL. Loser walks empty." />
+<title>$CRIMEWORK — Film the proof. Earn SOL.</title>
+<meta name="description" content="CRIMEWORK is the single-take bounty board. Pick a task, film it, get paid in SOL. No edits. No cuts. No trophies." />
 <link rel="icon" type="image/png" href="logo.png" />
 <link rel="apple-touch-icon" href="logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
@@ -18,15 +18,9 @@
     --ink-3: #8a8a8a;
     --line: #e5e5e5;
     --line-2: #d4d4d4;
-    --gray: #f5f5f5;
+    --gray: #f3f3f3;
+    --gray-2: #ededed;
     --black: #0a0a0a;
-
-    --blue: #1e6cff;
-    --blue-deep: #0b46c2;
-    --red: #ff2547;
-    --red-deep: #c80f30;
-
-    --green: #00b85c;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -38,36 +32,34 @@
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
   img { display: block; max-width: 100%; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; }
   .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
   /* NAV */
   nav.top {
     background: var(--bg);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 2px solid var(--black);
     position: sticky; top: 0; z-index: 50;
   }
   nav.top .inner {
     max-width: 1180px; margin: 0 auto;
-    padding: 12px 24px;
+    padding: 10px 24px;
     display: flex; align-items: center; justify-content: space-between; gap: 18px;
   }
   nav.top .brand { display: flex; align-items: center; gap: 10px; }
-  nav.top .brand img { width: 34px; height: 34px; border-radius: 6px; }
-  nav.top .brand .name { font-weight: 900; font-size: 17px; letter-spacing: 0.02em; }
+  nav.top .brand img { width: 38px; height: 38px; object-fit: contain; }
+  nav.top .brand .name { font-weight: 900; font-size: 18px; letter-spacing: 0.04em; }
   nav.top .links { display: flex; gap: 30px; font-weight: 800; font-size: 13px; letter-spacing: 0.02em; }
-  nav.top .links a { color: var(--ink); }
-  nav.top .links a:hover { color: var(--blue); }
+  nav.top .links a:hover { text-decoration: underline; }
   nav.top .select-wallet {
-    background: var(--red);
-    color: #fff;
+    background: var(--black); color: #fff;
     padding: 10px 18px;
-    font-weight: 900;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-weight: 900; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
     cursor: pointer;
+    border: 2px solid var(--black);
   }
-  nav.top .select-wallet:hover { background: var(--red-deep); }
+  nav.top .select-wallet:hover { background: #fff; color: var(--black); }
 
   /* TICKER */
   .ticker {
@@ -77,20 +69,18 @@
     white-space: nowrap;
     padding: 10px 0;
     font-weight: 800; font-size: 13px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
-  .ticker .track { display: inline-block; animation: tk 38s linear infinite; padding-left: 100%; }
+  .ticker .track { display: inline-block; animation: tk 36s linear infinite; padding-left: 100%; }
   .ticker .item { padding: 0 14px; }
-  .ticker .item .sol { color: var(--red); }
-  .ticker .item .sol.blue { color: #6ea8ff; }
+  .ticker .item .sol { color: #fff; opacity: 0.85; font-weight: 900; }
   .ticker .sep { color: #fff; opacity: 0.4; padding: 0 4px; }
   @keyframes tk { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
   /* HERO */
   .hero {
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%),
-      linear-gradient(110deg, var(--blue-deep) 0%, var(--blue) 35%, var(--red) 65%, var(--red-deep) 100%);
+    background: var(--black);
     color: #fff;
     padding: 60px 0;
     position: relative;
@@ -98,12 +88,9 @@
   }
   .hero::before {
     content: "";
-    position: absolute; left: 50%; top: 0; bottom: 0;
-    width: 4px;
-    background: linear-gradient(180deg, transparent, #fff, transparent);
-    transform: translateX(-50%) skewX(-8deg);
-    opacity: 0.55;
-    filter: blur(1px);
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 2px, transparent 2px 14px);
     pointer-events: none;
   }
   .hero .inner {
@@ -121,61 +108,57 @@
     letter-spacing: -0.02em;
     margin-bottom: 18px;
   }
-  .hero h1 .b { color: #fff; opacity: 0.7; }
-  .hero .sub { font-size: 16px; font-weight: 600; margin-bottom: 22px; max-width: 520px; opacity: 0.95; }
+  .hero h1 .b { color: #fff; opacity: 0.55; }
+  .hero .sub { font-size: 16px; font-weight: 600; margin-bottom: 22px; max-width: 520px; opacity: 0.92; }
   .hero .actions { display: flex; gap: 10px; flex-wrap: wrap; }
   .hero .btn {
-    background: var(--black); color: #fff;
+    background: #fff; color: var(--black);
     padding: 13px 22px;
     font-weight: 900; font-size: 13px;
     letter-spacing: 0.06em; text-transform: uppercase;
-    border: 2px solid var(--black);
+    border: 2px solid #fff;
     cursor: pointer;
   }
-  .hero .btn:hover { background: #fff; color: var(--black); }
-  .hero .btn.outline { background: transparent; color: #fff; border-color: #fff; }
+  .hero .btn:hover { background: var(--black); color: #fff; }
+  .hero .btn.outline { background: transparent; color: #fff; }
   .hero .btn.outline:hover { background: #fff; color: var(--black); }
 
   .hero-card {
     background: #fff; color: var(--ink);
-    border: 2px solid var(--black);
+    border: 2px solid #fff;
     width: 100%;
   }
   .hero-card .top { display: flex; gap: 12px; align-items: center; padding: 14px; border-bottom: 2px solid var(--black); }
-  .hero-card .av { width: 46px; height: 46px; border: 2px solid var(--black); overflow: hidden; flex-shrink: 0; border-radius: 6px; }
+  .hero-card .av { width: 46px; height: 46px; border: 2px solid var(--black); overflow: hidden; flex-shrink: 0; }
   .hero-card .av img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-card .top .label { color: var(--red); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
+  .hero-card .top .label { color: var(--black); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
   .hero-card .top .h { font-weight: 800; font-size: 15px; line-height: 1.2; margin-top: 2px; }
   .hero-card .head-row { background: var(--black); color: #fff; padding: 10px 14px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; }
   .hero-card .row { display: flex; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 13px; }
   .hero-card .row:last-child { border-bottom: none; }
   .hero-card .row .sol { font-weight: 900; }
-  .hero-card .row .sol.blue { color: var(--blue); }
-  .hero-card .row .sol.red { color: var(--red); }
 
   /* LORE */
-  .lore { padding: 56px 0; background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .lore { padding: 56px 0; background: #fff; border-bottom: 2px solid var(--black); }
   .lore .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: stretch; }
   .lore-title {
-    background: var(--red); color: #fff;
+    background: var(--black); color: #fff;
     padding: 30px;
     display: flex; flex-direction: column; justify-content: space-between;
-    border: 2px solid var(--red);
+    border: 2px solid var(--black);
   }
-  .lore-title .kicker { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .lore-title .kicker { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; opacity: 0.7; }
   .lore-title h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; }
   .lore-body { display: flex; flex-direction: column; gap: 16px; }
   .lore-body .top-box { border: 2px solid var(--black); padding: 20px; font-size: 14px; line-height: 1.55; }
-  .lore-body .top-box .em { color: var(--red); font-weight: 900; }
+  .lore-body .top-box .em { color: var(--black); font-weight: 900; text-decoration: underline; }
   .lore-body .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .lore-body .row-2 .box { border: 2px solid var(--black); padding: 18px; }
   .lore-body .box .k { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
-  .lore-body .box .k.blue { color: var(--blue); }
-  .lore-body .box .k.red { color: var(--red); }
   .lore-body .box p { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
 
   /* HOW IT WORKS */
-  .how { padding: 56px 0; }
+  .how { padding: 56px 0; background: #fff; }
   .how .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
   .how h2 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; letter-spacing: -0.02em; }
   .how .start-btn {
@@ -184,8 +167,9 @@
     font-weight: 900; font-size: 13px;
     letter-spacing: 0.08em; text-transform: uppercase;
     cursor: pointer;
+    border: 2px solid var(--black);
   }
-  .how .start-btn:hover { background: var(--red); }
+  .how .start-btn:hover { background: #fff; color: var(--black); }
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .step {
     border: 2px solid var(--black);
@@ -194,8 +178,8 @@
     display: flex; flex-direction: column; justify-content: space-between;
   }
   .step .num {
-    background: var(--red); color: #fff;
-    width: 30px; height: 30px;
+    background: var(--black); color: #fff;
+    width: 32px; height: 32px;
     display: flex; align-items: center; justify-content: center;
     font-weight: 900; font-size: 14px;
     margin-bottom: 16px;
@@ -203,17 +187,18 @@
   .step h3 { font-size: 16px; font-weight: 900; line-height: 1.3; }
 
   /* BOUNTIES */
-  .bounties { padding: 50px 0 60px; background: var(--gray); border-top: 2px solid var(--black); }
+  .bounties { padding: 50px 0 60px; background: var(--gray); border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); }
   .bounties .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; flex-wrap: wrap; gap: 12px; }
   .bounties h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.02em; }
   .bounties .view-all {
-    background: var(--red); color: #fff;
+    background: var(--black); color: #fff;
     padding: 10px 20px;
     font-weight: 900; font-size: 13px;
     letter-spacing: 0.06em; text-transform: uppercase;
     cursor: pointer;
+    border: 2px solid var(--black);
   }
-  .bounties .view-all:hover { background: var(--red-deep); }
+  .bounties .view-all:hover { background: #fff; color: var(--black); }
 
   .filters { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
   .filters input, .filters select {
@@ -224,7 +209,7 @@
     color: var(--ink);
   }
   .filters input { flex: 1; min-width: 200px; }
-  .filters input:focus, .filters select:focus { outline: none; border-color: var(--red); }
+  .filters input:focus, .filters select:focus { outline: none; }
   .filters input::placeholder { color: var(--ink-3); }
 
   .bounty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -239,26 +224,26 @@
     color: #fff;
     padding: 6px 10px;
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     display: flex; align-items: center; justify-content: space-between;
     gap: 8px;
-    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    text-transform: uppercase;
   }
-  .bounty .ca-bar .ca {
+  .bounty .ca-bar .title-chip {
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     flex: 1; min-width: 0;
   }
   .bounty .ca-bar .open-tag {
-    background: var(--green); color: #fff;
+    background: #fff; color: var(--black);
     padding: 2px 8px;
     font-size: 10px;
     font-weight: 900;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     flex-shrink: 0;
   }
-  .bounty .ca-bar .open-tag.dueling {
-    background: var(--red);
+  .bounty .ca-bar .open-tag.claimed {
+    background: var(--ink-2); color: #fff;
   }
   .bounty .thumb {
     position: relative;
@@ -269,29 +254,8 @@
   .bounty .thumb img {
     width: 100%; height: 100%;
     object-fit: cover;
+    filter: grayscale(100%) contrast(1.05);
   }
-  .bounty .slot-strip {
-    display: grid; grid-template-columns: 1fr 36px 1fr;
-    align-items: center;
-    background: #000;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .bounty .slot-strip .blue { padding: 8px 10px; background: var(--blue); text-align: center; }
-  .bounty .slot-strip .red { padding: 8px 10px; background: var(--red); text-align: center; }
-  .bounty .slot-strip .vs {
-    text-align: center;
-    color: #fff;
-    background: #000;
-    font-weight: 900;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    padding: 8px 0;
-  }
-  .bounty .slot-strip .open { opacity: 0.85; }
   .bounty .meta { padding: 14px 16px 6px; }
   .bounty .meta .small-row {
     display: flex; justify-content: space-between;
@@ -299,7 +263,7 @@
     color: var(--ink-3);
     margin-bottom: 6px;
   }
-  .bounty .meta h3 { font-size: 16px; font-weight: 900; margin-bottom: 4px; line-height: 1.25; }
+  .bounty .meta h3 { font-size: 17px; font-weight: 900; margin-bottom: 4px; line-height: 1.25; }
   .bounty .meta .desc { font-size: 12px; color: var(--ink-2); line-height: 1.45; margin-bottom: 12px; }
   .bounty .stats {
     display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -316,44 +280,39 @@
     border-top: 1px solid var(--line);
     margin-top: auto;
   }
-  .bounty .foot .wallet { font-size: 11px; font-weight: 700; color: var(--ink-3); font-family: 'JetBrains Mono', monospace; }
+  .bounty .foot .wallet { font-size: 11px; font-weight: 700; color: var(--ink-3); }
   .bounty .foot .go {
     background: var(--black); color: #fff;
     padding: 8px 14px;
     font-weight: 900; font-size: 11px; letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
+    border: 2px solid var(--black);
   }
-  .bounty .foot .go:hover { background: var(--red); }
+  .bounty .foot .go:hover { background: #fff; color: var(--black); }
 
   /* CTA */
   .cta { background: var(--black); color: #fff; padding: 50px 0; border-top: 2px solid var(--black); }
   .cta .inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .cta .kicker { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .cta .kicker { color: #fff; font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; opacity: 0.6; }
   .cta h2 { font-size: clamp(28px, 4.5vw, 48px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; max-width: 760px; }
-  .cta .ca {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: #ccc;
-    margin-top: 14px;
-    word-break: break-all;
-  }
   .cta .launch {
     background: #fff; color: var(--black);
     padding: 14px 22px;
     font-weight: 900; font-size: 12px;
     letter-spacing: 0.08em; text-transform: uppercase;
     white-space: nowrap; cursor: pointer;
+    border: 2px solid #fff;
   }
-  .cta .launch:hover { background: var(--red); color: #fff; }
+  .cta .launch:hover { background: var(--black); color: #fff; }
 
   /* FOOTER */
-  footer { background: #fff; padding: 24px 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
+  footer { background: #fff; padding: 24px 0; border-top: 2px solid var(--black); font-size: 12px; color: var(--ink-3); }
   footer .inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
   footer .left { display: flex; align-items: center; gap: 8px; font-weight: 800; }
-  footer .left img { width: 22px; height: 22px; border-radius: 4px; }
+  footer .left img { width: 22px; height: 22px; object-fit: contain; }
   footer .right { display: flex; gap: 18px; font-weight: 700; }
-  footer .right a:hover { color: var(--red); }
+  footer .right a:hover { color: var(--black); text-decoration: underline; }
 
   /* Wallet modal */
   .wallet-modal-bg {
@@ -403,14 +362,13 @@
 <nav class="top">
   <div class="inner">
     <div class="brand">
-      <img src="logo.png" alt="PUMPROYALE" />
-      <div class="name">PUMPROYALE</div>
+      <img src="logo.png" alt="CRIMEWORK" />
+      <div class="name">CRIMEWORK</div>
     </div>
     <div class="links">
       <a href="#bounties">BOUNTIES</a>
       <a href="#how">HOW IT WORKS</a>
-      <a href="#">DASHBOARD</a>
-      <a href="#">X</a>
+      <a href="#lore">LORE</a>
     </div>
     <button class="select-wallet" onclick="openWalletModal()">SELECT WALLET</button>
   </div>
@@ -420,16 +378,16 @@
 <div class="ticker">
   <div class="track">
     <span class="item">beat the shit out of someone</span> <span class="sol">5 SOL</span><span class="sep">///</span>
-    <span class="item">break a car mirror</span> <span class="sol blue">8 SOL</span><span class="sep">///</span>
+    <span class="item">break a car mirror</span> <span class="sol">8 SOL</span><span class="sep">///</span>
     <span class="item">scream the ticker out loud at night</span> <span class="sol">2 SOL</span><span class="sep">///</span>
-    <span class="item">streak the knicks game</span> <span class="sol blue">100 SOL</span><span class="sep">///</span>
+    <span class="item">streak the knicks game</span> <span class="sol">100 SOL</span><span class="sep">///</span>
     <span class="item">eat a ghost pepper live</span> <span class="sol">15 SOL</span><span class="sep">///</span>
-    <span class="item">ice bath shiver-off</span> <span class="sol blue">30 SOL</span><span class="sep">///</span>
+    <span class="item">ice bath shiver test</span> <span class="sol">30 SOL</span><span class="sep">///</span>
     <!-- duplicate for loop -->
     <span class="item">beat the shit out of someone</span> <span class="sol">5 SOL</span><span class="sep">///</span>
-    <span class="item">break a car mirror</span> <span class="sol blue">8 SOL</span><span class="sep">///</span>
+    <span class="item">break a car mirror</span> <span class="sol">8 SOL</span><span class="sep">///</span>
     <span class="item">scream the ticker out loud at night</span> <span class="sol">2 SOL</span><span class="sep">///</span>
-    <span class="item">streak the knicks game</span> <span class="sol blue">100 SOL</span><span class="sep">///</span>
+    <span class="item">streak the knicks game</span> <span class="sol">100 SOL</span><span class="sep">///</span>
   </div>
 </div>
 
@@ -437,10 +395,10 @@
 <section class="hero">
   <div class="container inner">
     <div>
-      <h1>1v1 video bounties. <span class="b">Fastest film wins.</span> Loser eats dirt.</h1>
-      <p class="sub">PUMPROYALE is the duel clash of the bounties. Two slots per bounty — blue vs red. Pick a task, ante your SOL, race to upload the proof. <strong>Winner takes all.</strong></p>
+      <h1>Pick a bounty. <span class="b">Film the proof.</span> Earn SOL.</h1>
+      <p class="sub">CRIMEWORK is the single-take bounty board. One person, one task, one continuous video. The smart contract releases your SOL the moment the proof clears. No edits. No cuts. No trophies.</p>
       <div class="actions">
-        <a class="btn" href="#bounties">Enter the Arena</a>
+        <a class="btn" href="#bounties">Browse Bounties</a>
         <button class="btn outline" onclick="openWalletModal()">Connect Wallet</button>
       </div>
     </div>
@@ -448,21 +406,23 @@
       <div class="top">
         <div class="av"><img src="logo.png" alt="" /></div>
         <div>
-          <div class="label">⚔ LIVE DUELS</div>
-          <div class="h">Two slots. One pot. Fastest film eats.</div>
+          <div class="label">⬤ OPEN BOUNTIES</div>
+          <div class="h">Film the proof. Get the SOL.</div>
         </div>
       </div>
-      <div class="head-row">ACTIVE BOUNTIES · 24H CAP</div>
-      <div class="row"><span>streak the knicks game</span><span class="sol blue">100 SOL</span></div>
-      <div class="row"><span>break a car mirror</span><span class="sol red">8 SOL</span></div>
-      <div class="row"><span>beat the shit out of someone</span><span class="sol blue">5 SOL</span></div>
-      <div class="row"><span>scream the ticker at night</span><span class="sol red">2 SOL</span></div>
+      <div class="head-row">ACTIVE BOUNTIES · SINGLE-TAKE PROOF</div>
+      <div class="row"><span>streak the knicks game</span><span class="sol">100 SOL</span></div>
+      <div class="row"><span>ice bath shiver test</span><span class="sol">30 SOL</span></div>
+      <div class="row"><span>eat a ghost pepper live</span><span class="sol">15 SOL</span></div>
+      <div class="row"><span>break a car mirror</span><span class="sol">8 SOL</span></div>
+      <div class="row"><span>beat the shit out of someone</span><span class="sol">5 SOL</span></div>
+      <div class="row"><span>scream the ticker at night</span><span class="sol">2 SOL</span></div>
     </div>
   </div>
 </section>
 
 <!-- LORE -->
-<section class="lore">
+<section class="lore" id="lore">
   <div class="container grid">
     <div class="lore-title">
       <div class="kicker">THE LORE</div>
@@ -470,16 +430,16 @@
     </div>
     <div class="lore-body">
       <div class="top-box">
-        Bounty boards reward edited clips. Streams get attention but no rewards. We wanted a platform where <span class="em">every task is a 1v1 duel</span>, both duelists ante SOL into escrow, and the <span class="em">fastest valid video proof takes the entire pot.</span> No team votes, no edits, no participation trophies.
+        Bounty boards are full of editors faking proof. We wanted a board where <span class="em">every bounty is one person, one camera, one continuous take</span>. The SOL escrows before the lens caps come off. <span class="em">No proof, no payout.</span>
       </div>
       <div class="row-2">
         <div class="box">
-          <div class="k blue">PROBLEM</div>
-          <p>Solo bounty boards reward edited clips. There's no urgency, no opponent, no skin in the game. Anyone can take 4 weeks to film a "best take."</p>
+          <div class="k">PROBLEM</div>
+          <p>Bounty boards reward edited clips and ten-take montages. Anyone with Premiere can fake a "best take."</p>
         </div>
         <div class="box">
-          <div class="k red">ANSWER</div>
-          <p>Two slots, two antes, one clock. Both duelists lock SOL in escrow. First valid single-take video wins the pot — loser walks empty.</p>
+          <div class="k">ANSWER</div>
+          <p>Single-take video. Continuous timestamp. First valid submission claims the bounty. Smart contract releases the SOL the instant the proof clears.</p>
         </div>
       </div>
     </div>
@@ -496,15 +456,15 @@
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
-        <h3>Pick a bounty &amp; claim a slot (blue or red). Lock in your SOL ante.</h3>
+        <h3>Pick a bounty. Connect wallet. Claim the slot.</h3>
       </div>
       <div class="step">
         <div class="num">2</div>
-        <h3>Film yourself completing the task — single take, no edits, no cuts.</h3>
+        <h3>Film yourself completing the task. Single take. No edits.</h3>
       </div>
       <div class="step">
         <div class="num">3</div>
-        <h3>Fastest valid video on-chain wins the full pot. Loser gets nothing.</h3>
+        <h3>Submit. The contract verifies. The SOL hits your wallet.</h3>
       </div>
     </div>
   </div>
@@ -514,16 +474,16 @@
 <section class="bounties" id="bounties">
   <div class="container">
     <div class="head">
-      <h2>Bounties</h2>
+      <h2>Open bounties</h2>
       <a class="view-all" href="#bounties">View All</a>
     </div>
 
     <div class="filters">
-      <input type="text" id="bountySearch" placeholder="Search title or ticker" />
+      <input type="text" id="bountySearch" placeholder="Search bounties" />
       <select>
         <option>All status</option>
-        <option>Open slots</option>
-        <option>Duel live</option>
+        <option>Open</option>
+        <option>Claimed</option>
       </select>
       <select>
         <option>All rewards</option>
@@ -534,7 +494,6 @@
       <select>
         <option>Newest</option>
         <option>Highest reward</option>
-        <option>Ending soonest</option>
       </select>
     </div>
 
@@ -546,10 +505,10 @@
 <section class="cta">
   <div class="container inner">
     <div>
-      <div class="kicker">$PUMPROYALE</div>
-      <h2>Two slots. One pot. Loser walks empty.</h2>
+      <div class="kicker">$CRIMEWORK</div>
+      <h2>One person. One take. The SOL is the trophy.</h2>
     </div>
-    <a class="launch" href="#bounties">ENTER THE ARENA →</a>
+    <a class="launch" href="#bounties">BROWSE BOUNTIES →</a>
   </div>
 </section>
 
@@ -558,7 +517,7 @@
   <div class="container inner">
     <div class="left">
       <img src="logo.png" alt="" />
-      <span>$PUMPROYALE © 2026 · duel. film. eat.</span>
+      <span>$CRIMEWORK © 2026 · film. submit. earn.</span>
     </div>
     <div class="right">
       <a href="#">X / Twitter</a>
@@ -571,7 +530,7 @@
 <div class="wallet-modal-bg" id="walletModal" onclick="if(event.target===this)closeWalletModal()">
   <div class="wallet-modal">
     <h3>Connect Wallet</h3>
-    <p>Connect a Solana wallet to claim a duel slot and ante your SOL into escrow.</p>
+    <p>Connect a Solana wallet to claim a bounty and receive the payout.</p>
     <div class="wlist">
       <button onclick="connectWallet('Phantom')">Phantom <span>👻</span></button>
       <button onclick="connectWallet('Solflare')">Solflare <span>🔥</span></button>
@@ -586,14 +545,12 @@
   const BOUNTIES = [
     {
       title: "beat the shit out of someone",
-      desc: "preferably a rugger",
+      desc: "preferably a rugger. one take. show their face. don't kill them.",
       img: "https://images.unsplash.com/photo-1547005403-9c0fa90d2bd5?w=900&q=70&auto=format&fit=crop",
-      imgFallback: null,
       prize: 5, clock: "1302d 19h left",
       wallet: "Hdby...r4u1",
       proofs: 1,
-      blueTaken: true, redTaken: false,
-      status: "open"
+      claimed: false,
     },
     {
       title: "break a car mirror",
@@ -602,18 +559,16 @@
       prize: 8, clock: "1302d 19h left",
       wallet: "53kR...24Xx",
       proofs: 0,
-      blueTaken: false, redTaken: false,
-      status: "open"
+      claimed: false,
     },
     {
-      title: "scream the ticker out loud at night",
-      desc: "between 11pm and 4am. public street. shout '$PUMPROYALE' clearly. neighbours optional.",
+      title: "scream the ticker at night",
+      desc: "between 11pm and 4am. public street. shout '$CRIMEWORK' clearly. neighbours optional.",
       img: "assets/scream.png",
       prize: 2, clock: "1302d 19h left",
       wallet: "53kR...24Xx",
       proofs: 0,
-      blueTaken: true, redTaken: true,
-      status: "dueling"
+      claimed: true,
     },
     {
       title: "streak the knicks game",
@@ -622,35 +577,27 @@
       prize: 100, clock: "1302d 19h left",
       wallet: "53kR...24Xx",
       proofs: 0,
-      blueTaken: false, redTaken: true,
-      status: "open"
+      claimed: false,
     },
     {
       title: "eat a ghost pepper live",
-      desc: "whole pepper. no water. 60 seconds before chasing.",
+      desc: "whole pepper. no water. 60 seconds before chasing it down.",
       img: "https://images.unsplash.com/photo-1583395145269-3ee01a25f1de?w=900&q=70&auto=format&fit=crop",
       prize: 15, clock: "1302d 19h left",
       wallet: "9aP...7Yb1",
       proofs: 0,
-      blueTaken: false, redTaken: false,
-      status: "open"
+      claimed: false,
     },
     {
-      title: "ice bath shiver-off",
-      desc: "submerge to neck. first visible uncontrolled shivers wins.",
+      title: "ice bath shiver test",
+      desc: "submerge to neck. one continuous take. until visible uncontrolled shivers.",
       img: "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?w=900&q=70&auto=format&fit=crop",
       prize: 30, clock: "1302d 19h left",
       wallet: "2zN...J19q",
       proofs: 0,
-      blueTaken: true, redTaken: true,
-      status: "dueling"
+      claimed: false,
     },
   ];
-
-  function slotLabel(taken, side) {
-    if (taken) return (side === 'blue' ? 'BLUE LOCKED' : 'RED LOCKED');
-    return (side === 'blue' ? 'BLUE OPEN' : 'RED OPEN');
-  }
 
   function renderBounties(filter = '') {
     const q = filter.trim().toLowerCase();
@@ -663,16 +610,11 @@
     grid.innerHTML = items.map(b => `
       <article class="bounty">
         <div class="ca-bar">
-          <span class="ca">${b.title.toUpperCase()}</span>
-          <span class="open-tag ${b.status === 'dueling' ? 'dueling' : ''}">${b.status === 'dueling' ? 'DUEL LIVE' : 'OPEN'}</span>
+          <span class="title-chip">${b.title.toUpperCase()}</span>
+          <span class="open-tag ${b.claimed ? 'claimed' : ''}">${b.claimed ? 'CLAIMED' : 'OPEN'}</span>
         </div>
         <div class="thumb">
-          <img src="${b.img}" alt="" loading="lazy" onerror="this.style.background='#222';this.style.display='block';this.style.opacity='0.4';" />
-        </div>
-        <div class="slot-strip">
-          <div class="blue ${b.blueTaken ? '' : 'open'}">${slotLabel(b.blueTaken, 'blue')}</div>
-          <div class="vs">VS</div>
-          <div class="red ${b.redTaken ? '' : 'open'}">${slotLabel(b.redTaken, 'red')}</div>
+          <img src="${b.img}" alt="" loading="lazy" onerror="this.style.background='#222';this.style.opacity='0.3';" />
         </div>
         <div class="meta">
           <div class="small-row"><span>SOL REWARD</span><span>${b.proofs} PROOFS</span></div>
@@ -684,7 +626,7 @@
           <div class="b"><div class="l">CLOCK</div><div class="v">${b.clock}</div></div>
         </div>
         <div class="foot">
-          <span class="wallet">${b.wallet}</span>
+          <span class="wallet mono">${b.wallet}</span>
           <button class="go" onclick="openWalletModal()">VIEW BOUNTY</button>
         </div>
       </article>
