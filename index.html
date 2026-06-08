@@ -4,33 +4,29 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>$PUMPROYALE — The Duel Clash of the Bounties.</title>
-<meta name="description" content="PUMPROYALE is the 1v1 bounty arena. Pick a video bounty, duel another streamer, fastest to finish takes the SOL. Winner eats, loser gets nothing." />
+<meta name="description" content="PUMPROYALE is the 1v1 video bounty arena. Two slots per duel. Fastest to film the proof wins the SOL. Loser walks empty." />
 <link rel="icon" type="image/png" href="logo.png" />
 <link rel="apple-touch-icon" href="logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --bg-2: #11111a;
-    --panel: #15151f;
-    --line: #1e1e2b;
-    --line-2: #2a2a3a;
-    --ink: #ffffff;
-    --ink-2: #c8c8d4;
-    --ink-3: #7a7a8a;
+    --bg: #ffffff;
+    --ink: #0a0a0a;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --line: #e5e5e5;
+    --line-2: #d4d4d4;
+    --gray: #f5f5f5;
+    --black: #0a0a0a;
 
-    --blue: #1e90ff;
-    --blue-2: #0066ff;
-    --blue-glow: rgba(30,144,255,0.5);
-
+    --blue: #1e6cff;
+    --blue-deep: #0b46c2;
     --red: #ff2547;
-    --red-2: #d80f30;
-    --red-glow: rgba(255,37,71,0.5);
+    --red-deep: #c80f30;
 
-    --yellow: #ffd700;
-    --gold: #f5b400;
+    --green: #00b85c;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -38,470 +34,348 @@
     color: var(--ink);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
   img { display: block; max-width: 100%; }
-  .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
-  .display { font-family: 'Bebas Neue', Impact, sans-serif; letter-spacing: 0.02em; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
   /* NAV */
   nav.top {
-    border-bottom: 2px solid var(--line-2);
-    background: rgba(10,10,15,0.92);
-    backdrop-filter: blur(8px);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
     position: sticky; top: 0; z-index: 50;
   }
   nav.top .inner {
-    max-width: 1240px; margin: 0 auto;
+    max-width: 1180px; margin: 0 auto;
     padding: 12px 24px;
     display: flex; align-items: center; justify-content: space-between; gap: 18px;
   }
-  nav.top .brand { display: flex; align-items: center; gap: 12px; }
-  nav.top .brand img { width: 40px; height: 40px; border-radius: 8px; }
-  nav.top .brand .name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 0.08em;
-    background: linear-gradient(90deg, var(--blue), #fff 50%, var(--red));
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 400;
-  }
-  nav.top .links { display: flex; gap: 24px; font-weight: 800; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
-  nav.top .links a { color: var(--ink-2); }
-  nav.top .links a:hover { color: var(--ink); }
-  nav.top .links a.duel-tab { color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
-  nav.top .links a.duel-tab .vs { color: var(--red); font-weight: 900; }
-  nav.top .links a.duel-tab .vs::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-right: 6px; animation: pulse 1.2s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-  nav.top .nav-actions { display: flex; gap: 8px; }
-  nav.top .nav-actions a, nav.top .nav-actions button {
-    padding: 10px 16px; font-weight: 800; font-size: 12px;
-    letter-spacing: 0.06em; text-transform: uppercase; border: 2px solid;
-    white-space: nowrap;
-  }
-  .btn-connect { background: var(--bg); color: var(--ink); border-color: var(--line-2); }
-  .btn-connect:hover { border-color: var(--ink); }
-  .btn-duel {
-    background: linear-gradient(90deg, var(--blue), var(--red));
+  nav.top .brand { display: flex; align-items: center; gap: 10px; }
+  nav.top .brand img { width: 34px; height: 34px; border-radius: 6px; }
+  nav.top .brand .name { font-weight: 900; font-size: 17px; letter-spacing: 0.02em; }
+  nav.top .links { display: flex; gap: 30px; font-weight: 800; font-size: 13px; letter-spacing: 0.02em; }
+  nav.top .links a { color: var(--ink); }
+  nav.top .links a:hover { color: var(--blue); }
+  nav.top .select-wallet {
+    background: var(--red);
     color: #fff;
-    border-color: transparent;
-    box-shadow: 0 0 18px rgba(255,255,255,0.1);
+    padding: 10px 18px;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
   }
-  .btn-duel:hover { filter: brightness(1.15); }
-  .btn-buy { background: var(--gold); color: #1a1a00; border-color: var(--gold); }
-  .btn-buy:hover { background: var(--yellow); }
+  nav.top .select-wallet:hover { background: var(--red-deep); }
+
+  /* TICKER */
+  .ticker {
+    background: var(--black);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .ticker .track { display: inline-block; animation: tk 38s linear infinite; padding-left: 100%; }
+  .ticker .item { padding: 0 14px; }
+  .ticker .item .sol { color: var(--red); }
+  .ticker .item .sol.blue { color: #6ea8ff; }
+  .ticker .sep { color: #fff; opacity: 0.4; padding: 0 4px; }
+  @keyframes tk { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
   /* HERO */
   .hero {
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%),
+      linear-gradient(110deg, var(--blue-deep) 0%, var(--blue) 35%, var(--red) 65%, var(--red-deep) 100%);
+    color: #fff;
+    padding: 60px 0;
     position: relative;
     overflow: hidden;
-    padding: 60px 0 70px;
-    background:
-      radial-gradient(ellipse 70% 60% at 20% 40%, rgba(30,144,255,0.18), transparent 60%),
-      radial-gradient(ellipse 70% 60% at 80% 60%, rgba(255,37,71,0.18), transparent 60%),
-      var(--bg);
   }
   .hero::before {
     content: "";
     position: absolute; left: 50%; top: 0; bottom: 0;
-    width: 6px;
+    width: 4px;
     background: linear-gradient(180deg, transparent, #fff, transparent);
     transform: translateX(-50%) skewX(-8deg);
-    opacity: 0.5;
+    opacity: 0.55;
     filter: blur(1px);
-    box-shadow: 0 0 24px #fff;
-    z-index: 1;
     pointer-events: none;
   }
-  .hero-grid {
+  .hero .inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: center;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: start;
     position: relative;
     z-index: 2;
   }
-  .hero-left, .hero-right {
-    padding: 20px;
-    border-radius: 14px;
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
   }
-  .hero-left {
-    text-align: right;
-    background: linear-gradient(135deg, rgba(30,144,255,0.08), transparent 60%);
+  .hero h1 .b { color: #fff; opacity: 0.7; }
+  .hero .sub { font-size: 16px; font-weight: 600; margin-bottom: 22px; max-width: 520px; opacity: 0.95; }
+  .hero .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero .btn {
+    background: var(--black); color: #fff;
+    padding: 13px 22px;
+    font-weight: 900; font-size: 13px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 2px solid var(--black);
+    cursor: pointer;
   }
-  .hero-right {
-    text-align: left;
-    background: linear-gradient(225deg, rgba(255,37,71,0.08), transparent 60%);
-  }
-  .side-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 12px;
-    font-size: 11px; font-weight: 900; letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border: 2px solid;
-    margin-bottom: 14px;
-  }
-  .side-tag.blue { color: var(--blue); border-color: var(--blue); box-shadow: 0 0 12px var(--blue-glow); }
-  .side-tag.red { color: var(--red); border-color: var(--red); box-shadow: 0 0 12px var(--red-glow); }
-  .side-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; animation: pulse 1.2s infinite; }
-  .hero-side-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 6vw, 80px);
-    line-height: 0.9;
-    letter-spacing: 0.04em;
-    margin-bottom: 8px;
-  }
-  .hero-side-title.blue { color: var(--blue); text-shadow: 0 0 20px var(--blue-glow); }
-  .hero-side-title.red { color: var(--red); text-shadow: 0 0 20px var(--red-glow); }
-  .hero-side-sub { font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .hero .btn:hover { background: #fff; color: var(--black); }
+  .hero .btn.outline { background: transparent; color: #fff; border-color: #fff; }
+  .hero .btn.outline:hover { background: #fff; color: var(--black); }
 
-  .hero-center {
-    text-align: center;
-    margin-top: 50px;
-    position: relative;
-    z-index: 3;
+  .hero-card {
+    background: #fff; color: var(--ink);
+    border: 2px solid var(--black);
+    width: 100%;
   }
-  .hero-h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(56px, 9vw, 128px);
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    margin-bottom: 14px;
-  }
-  .hero-h1 .word-1 { color: var(--blue); text-shadow: 0 0 30px var(--blue-glow); }
-  .hero-h1 .word-vs { color: var(--yellow); font-style: italic; padding: 0 14px; }
-  .hero-h1 .word-2 { color: var(--red); text-shadow: 0 0 30px var(--red-glow); }
-  .hero-sub {
-    font-size: 17px;
-    color: var(--ink-2);
-    max-width: 700px;
-    margin: 0 auto 28px;
-    line-height: 1.55;
-    font-weight: 600;
-  }
-  .hero-sub strong { color: var(--yellow); }
-  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .hero-cta a, .hero-cta button {
-    padding: 16px 28px; font-weight: 900; font-size: 14px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    border: 3px solid; cursor: pointer;
-  }
-  .cta-primary {
-    background: linear-gradient(90deg, var(--blue), var(--red));
-    color: #fff; border-color: transparent;
-    box-shadow: 0 6px 24px rgba(255,255,255,0.12);
-  }
-  .cta-primary:hover { filter: brightness(1.15); }
-  .cta-secondary {
-    background: var(--bg-2); color: var(--ink); border-color: var(--line-2);
-  }
-  .cta-secondary:hover { border-color: var(--ink); }
+  .hero-card .top { display: flex; gap: 12px; align-items: center; padding: 14px; border-bottom: 2px solid var(--black); }
+  .hero-card .av { width: 46px; height: 46px; border: 2px solid var(--black); overflow: hidden; flex-shrink: 0; border-radius: 6px; }
+  .hero-card .av img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-card .top .label { color: var(--red); font-weight: 900; font-size: 11px; letter-spacing: 0.08em; }
+  .hero-card .top .h { font-weight: 800; font-size: 15px; line-height: 1.2; margin-top: 2px; }
+  .hero-card .head-row { background: var(--black); color: #fff; padding: 10px 14px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; }
+  .hero-card .row { display: flex; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 13px; }
+  .hero-card .row:last-child { border-bottom: none; }
+  .hero-card .row .sol { font-weight: 900; }
+  .hero-card .row .sol.blue { color: var(--blue); }
+  .hero-card .row .sol.red { color: var(--red); }
 
-  /* TICKER */
-  .ticker {
-    background: #000;
-    border-top: 2px solid var(--line-2);
-    border-bottom: 2px solid var(--line-2);
-    overflow: hidden;
-    padding: 12px 0;
-    font-weight: 800; font-size: 13px; letter-spacing: 0.05em;
-    text-transform: uppercase;
-    white-space: nowrap;
+  /* LORE */
+  .lore { padding: 56px 0; background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .lore .grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: stretch; }
+  .lore-title {
+    background: var(--red); color: #fff;
+    padding: 30px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border: 2px solid var(--red);
   }
-  .ticker .track {
-    display: inline-block;
-    animation: scroll 38s linear infinite;
-    padding-left: 100%;
-  }
-  .ticker .item { padding: 0 18px; color: var(--ink-2); }
-  .ticker .item.blue { color: var(--blue); }
-  .ticker .item.red { color: var(--red); }
-  .ticker .item.gold { color: var(--yellow); }
-  .ticker .sep { color: var(--ink-3); padding: 0 6px; }
-  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+  .lore-title .kicker { font-size: 12px; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .lore-title h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; }
+  .lore-body { display: flex; flex-direction: column; gap: 16px; }
+  .lore-body .top-box { border: 2px solid var(--black); padding: 20px; font-size: 14px; line-height: 1.55; }
+  .lore-body .top-box .em { color: var(--red); font-weight: 900; }
+  .lore-body .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lore-body .row-2 .box { border: 2px solid var(--black); padding: 18px; }
+  .lore-body .box .k { font-size: 11px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .lore-body .box .k.blue { color: var(--blue); }
+  .lore-body .box .k.red { color: var(--red); }
+  .lore-body .box p { font-size: 13px; line-height: 1.55; color: var(--ink-2); }
 
   /* HOW IT WORKS */
-  .how { padding: 70px 0; background: var(--bg); }
-  .section-head { text-align: center; margin-bottom: 40px; }
-  .eyebrow {
-    display: inline-block;
-    font-size: 12px; font-weight: 800; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--yellow);
-    margin-bottom: 12px;
-  }
-  .section-head h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 64px);
-    letter-spacing: 0.02em;
-    margin-bottom: 10px;
-  }
-  .section-head p { color: var(--ink-2); font-size: 15px; max-width: 640px; margin: 0 auto; line-height: 1.55; }
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .step {
-    background: var(--panel);
-    border: 2px solid var(--line-2);
-    padding: 24px 20px;
-    position: relative;
-    transition: border-color .2s ease;
-  }
-  .step:hover { border-color: var(--ink-3); }
-  .step .num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: var(--yellow);
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-  .step h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 0.02em;
-    margin-bottom: 8px;
-    color: var(--ink);
-  }
-  .step p { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
-
-  /* BOUNTIES — DUEL CARDS */
-  .bounties { padding: 70px 0; background: var(--bg-2); border-top: 2px solid var(--line-2); border-bottom: 2px solid var(--line-2); }
-  .bounty-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .bounty {
-    background: var(--panel);
-    border: 2px solid var(--line-2);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform .2s ease, border-color .2s ease;
-  }
-  .bounty:hover { transform: translateY(-4px); border-color: var(--yellow); }
-  .bounty-top {
-    display: grid;
-    grid-template-columns: 1fr 60px 1fr;
-    align-items: stretch;
-    background: #000;
-    position: relative;
-    min-height: 180px;
-  }
-  .slot {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .slot.blue { background: linear-gradient(135deg, rgba(30,144,255,0.25), rgba(30,144,255,0.05)); border-right: 1px solid var(--line-2); }
-  .slot.red { background: linear-gradient(225deg, rgba(255,37,71,0.25), rgba(255,37,71,0.05)); border-left: 1px solid var(--line-2); }
-  .slot-label {
-    font-size: 10px; font-weight: 900; letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .slot.blue .slot-label { color: var(--blue); }
-  .slot.red .slot-label { color: var(--red); }
-  .slot-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    color: var(--ink);
-    margin-bottom: 6px;
-    letter-spacing: 0.03em;
-  }
-  .slot-handle { font-size: 11px; color: var(--ink-3); }
-  .slot.open .slot-name { color: var(--ink-3); font-style: italic; }
-  .slot-join {
-    margin-top: 10px;
-    display: inline-block;
-    padding: 8px 14px;
-    border: 2px solid;
-    font-size: 11px; font-weight: 900;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    text-align: center;
+  .how { padding: 56px 0; }
+  .how .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .how h2 { font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; letter-spacing: -0.02em; }
+  .how .start-btn {
+    background: var(--black); color: #fff;
+    padding: 10px 22px;
+    font-weight: 900; font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase;
     cursor: pointer;
-    align-self: flex-start;
   }
-  .slot.blue .slot-join { color: var(--blue); border-color: var(--blue); }
-  .slot.blue .slot-join:hover { background: var(--blue); color: #fff; }
-  .slot.red .slot-join { color: var(--red); border-color: var(--red); }
-  .slot.red .slot-join:hover { background: var(--red); color: #fff; }
-
-  .vs-badge {
+  .how .start-btn:hover { background: var(--red); }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .step {
+    border: 2px solid var(--black);
+    padding: 22px 18px;
+    min-height: 130px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .step .num {
+    background: var(--red); color: #fff;
+    width: 30px; height: 30px;
     display: flex; align-items: center; justify-content: center;
-    background: #000;
-    color: var(--yellow);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.05em;
-    position: relative;
-    border-left: 2px solid var(--line-2);
-    border-right: 2px solid var(--line-2);
+    font-weight: 900; font-size: 14px;
+    margin-bottom: 16px;
   }
-  .vs-badge::before {
-    content: "";
-    position: absolute; top: 0; bottom: 0; left: 50%;
-    width: 3px;
-    background: linear-gradient(180deg, transparent, #fff, transparent);
-    transform: translateX(-50%) skewX(-12deg);
-    opacity: 0.6;
-    filter: blur(0.5px);
-  }
-  .vs-badge span { position: relative; z-index: 2; text-shadow: 0 0 12px var(--yellow); }
+  .step h3 { font-size: 16px; font-weight: 900; line-height: 1.3; }
 
-  .bounty-body {
-    padding: 18px 20px 0;
+  /* BOUNTIES */
+  .bounties { padding: 50px 0 60px; background: var(--gray); border-top: 2px solid var(--black); }
+  .bounties .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; flex-wrap: wrap; gap: 12px; }
+  .bounties h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.02em; }
+  .bounties .view-all {
+    background: var(--red); color: #fff;
+    padding: 10px 20px;
+    font-weight: 900; font-size: 13px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer;
   }
-  .bounty-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 0.02em;
+  .bounties .view-all:hover { background: var(--red-deep); }
+
+  .filters { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+  .filters input, .filters select {
+    border: 2px solid var(--black);
+    background: #fff;
+    padding: 10px 14px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
     color: var(--ink);
-    margin-bottom: 6px;
-    line-height: 1.1;
   }
-  .bounty-desc {
-    font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.55;
-    margin-bottom: 14px;
+  .filters input { flex: 1; min-width: 200px; }
+  .filters input:focus, .filters select:focus { outline: none; border-color: var(--red); }
+  .filters input::placeholder { color: var(--ink-3); }
+
+  .bounty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bounty {
+    background: #fff;
+    border: 2px solid var(--black);
+    overflow: hidden;
+    display: flex; flex-direction: column;
   }
-  .video-rules {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(255,215,0,0.08);
-    border: 1px solid rgba(255,215,0,0.25);
-    padding: 8px 12px;
-    font-size: 11px; color: var(--yellow);
-    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .video-rules .cam {
-    width: 18px; height: 18px;
-    background: var(--yellow); color: #000;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 900;
-  }
-  .prize-bar {
-    background: #000;
-    border: 2px solid var(--gold);
-    padding: 12px 16px;
-    margin: 0 20px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .prize-bar .prize-l { font-size: 10px; color: var(--yellow); letter-spacing: 0.15em; font-weight: 900; text-transform: uppercase; }
-  .prize-bar .prize-amt {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: var(--yellow);
-    line-height: 1;
-    text-shadow: 0 0 12px rgba(255,215,0,0.5);
-  }
-  .prize-bar .prize-amt .unit { font-size: 16px; opacity: 0.7; margin-left: 4px; }
-  .prize-bar .winner-tag {
-    text-align: right;
+  .bounty .ca-bar {
+    background: var(--black);
+    color: #fff;
+    padding: 6px 10px;
     font-size: 10px;
-    color: var(--ink-3);
-    letter-spacing: 0.08em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
+  .bounty .ca-bar .ca {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    flex: 1; min-width: 0;
+  }
+  .bounty .ca-bar .open-tag {
+    background: var(--green); color: #fff;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .bounty .ca-bar .open-tag.dueling {
+    background: var(--red);
+  }
+  .bounty .thumb {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: #1a1a1a;
+    overflow: hidden;
+  }
+  .bounty .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .bounty .slot-strip {
+    display: grid; grid-template-columns: 1fr 36px 1fr;
+    align-items: center;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    line-height: 1.3;
   }
-  .prize-bar .winner-tag strong { display: block; color: var(--ink); font-size: 13px; font-weight: 900; }
-
-  .bounty-foot {
-    padding: 14px 20px 18px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: var(--ink-3);
-    letter-spacing: 0.04em;
-  }
-  .bounty-foot .status {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-weight: 800; text-transform: uppercase;
-    color: var(--yellow);
-  }
-  .bounty-foot .status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 1.2s infinite; }
-  .bounty-foot .countdown { font-weight: 700; color: var(--ink-2); }
-
-  /* RULES STRIP */
-  .rules-strip {
-    background: linear-gradient(90deg, rgba(30,144,255,0.1), rgba(255,37,71,0.1));
-    border-top: 2px solid var(--line-2);
-    border-bottom: 2px solid var(--line-2);
-    padding: 26px 0;
-  }
-  .rules-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-  .rule .ico { font-size: 28px; margin-bottom: 8px; }
-  .rule h4 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; letter-spacing: 0.04em;
-    margin-bottom: 4px; color: var(--ink);
-  }
-  .rule p { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
-
-  /* FINAL CTA */
-  .final-cta {
-    padding: 70px 0;
+  .bounty .slot-strip .blue { padding: 8px 10px; background: var(--blue); text-align: center; }
+  .bounty .slot-strip .red { padding: 8px 10px; background: var(--red); text-align: center; }
+  .bounty .slot-strip .vs {
     text-align: center;
-    background:
-      radial-gradient(ellipse 60% 80% at 30% 50%, rgba(30,144,255,0.18), transparent 60%),
-      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(255,37,71,0.18), transparent 60%),
-      var(--bg);
+    color: #fff;
+    background: #000;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 8px 0;
   }
-  .final-cta h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 6vw, 72px);
-    letter-spacing: 0.03em;
-    margin-bottom: 14px;
+  .bounty .slot-strip .open { opacity: 0.85; }
+  .bounty .meta { padding: 14px 16px 6px; }
+  .bounty .meta .small-row {
+    display: flex; justify-content: space-between;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+    color: var(--ink-3);
+    margin-bottom: 6px;
   }
-  .final-cta h2 .blue { color: var(--blue); text-shadow: 0 0 24px var(--blue-glow); }
-  .final-cta h2 .red { color: var(--red); text-shadow: 0 0 24px var(--red-glow); }
-  .final-cta p { color: var(--ink-2); font-size: 15px; max-width: 540px; margin: 0 auto 24px; }
+  .bounty .meta h3 { font-size: 16px; font-weight: 900; margin-bottom: 4px; line-height: 1.25; }
+  .bounty .meta .desc { font-size: 12px; color: var(--ink-2); line-height: 1.45; margin-bottom: 12px; }
+  .bounty .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border: 2px solid var(--black);
+    margin: 0 16px 14px;
+  }
+  .bounty .stats .b { padding: 10px 12px; }
+  .bounty .stats .b + .b { border-left: 2px solid var(--black); }
+  .bounty .stats .b .l { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; color: var(--ink-3); margin-bottom: 2px; }
+  .bounty .stats .b .v { font-size: 14px; font-weight: 900; }
+  .bounty .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+    margin-top: auto;
+  }
+  .bounty .foot .wallet { font-size: 11px; font-weight: 700; color: var(--ink-3); font-family: 'JetBrains Mono', monospace; }
+  .bounty .foot .go {
+    background: var(--black); color: #fff;
+    padding: 8px 14px;
+    font-weight: 900; font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .bounty .foot .go:hover { background: var(--red); }
+
+  /* CTA */
+  .cta { background: var(--black); color: #fff; padding: 50px 0; border-top: 2px solid var(--black); }
+  .cta .inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .cta .kicker { color: var(--red); font-size: 12px; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .cta h2 { font-size: clamp(28px, 4.5vw, 48px); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; max-width: 760px; }
+  .cta .ca {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #ccc;
+    margin-top: 14px;
+    word-break: break-all;
+  }
+  .cta .launch {
+    background: #fff; color: var(--black);
+    padding: 14px 22px;
+    font-weight: 900; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    white-space: nowrap; cursor: pointer;
+  }
+  .cta .launch:hover { background: var(--red); color: #fff; }
 
   /* FOOTER */
-  footer {
-    background: #000;
-    border-top: 2px solid var(--line-2);
-    padding: 28px 0;
-    font-size: 12px;
-    color: var(--ink-3);
-  }
+  footer { background: #fff; padding: 24px 0; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
   footer .inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
-  footer .left { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink-2); }
-  footer .left img { width: 28px; height: 28px; border-radius: 6px; }
-  footer .right { display: flex; gap: 20px; font-weight: 700; }
-  footer .right a:hover { color: var(--ink); }
+  footer .left { display: flex; align-items: center; gap: 8px; font-weight: 800; }
+  footer .left img { width: 22px; height: 22px; border-radius: 4px; }
+  footer .right { display: flex; gap: 18px; font-weight: 700; }
+  footer .right a:hover { color: var(--red); }
 
   /* Wallet modal */
   .wallet-modal-bg {
     position: fixed; inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center; justify-content: center;
-    z-index: 100;
-    padding: 20px;
+    background: rgba(0,0,0,0.75);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 20px;
   }
   .wallet-modal-bg.open { display: flex; }
-  .wallet-modal {
-    background: var(--panel);
-    border: 2px solid var(--line-2);
-    max-width: 380px; width: 100%;
-    padding: 24px;
-  }
-  .wallet-modal h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 26px;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-  .wallet-modal p { font-size: 13px; color: var(--ink-3); margin-bottom: 18px; }
+  .wallet-modal { background: #fff; border: 2px solid var(--black); max-width: 380px; width: 100%; padding: 24px; }
+  .wallet-modal h3 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+  .wallet-modal p { font-size: 13px; color: var(--ink-2); margin-bottom: 18px; }
   .wallet-modal .wlist { display: flex; flex-direction: column; gap: 8px; }
   .wallet-modal .wlist button {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 16px;
-    border: 2px solid var(--line-2);
-    background: var(--bg);
+    border: 2px solid var(--black);
+    background: #fff;
     font-weight: 800; font-size: 14px;
     width: 100%;
-    color: var(--ink);
   }
-  .wallet-modal .wlist button:hover { border-color: var(--yellow); }
+  .wallet-modal .wlist button:hover { background: var(--black); color: #fff; }
   .wallet-modal .close {
     background: none; border: none;
     font-size: 12px; font-weight: 800;
@@ -512,18 +386,14 @@
 
   @media (max-width: 980px) {
     nav.top .links { display: none; }
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-left, .hero-right { text-align: center; }
-    .steps { grid-template-columns: repeat(2, 1fr); }
-    .bounty-grid { grid-template-columns: 1fr; }
-    .rules-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
+    .hero .inner { grid-template-columns: 1fr; }
+    .lore .grid { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
-    .rules-grid { grid-template-columns: 1fr; }
-    .bounty-top { grid-template-columns: 1fr; }
-    .bounty-top .vs-badge { padding: 8px; border: none; border-top: 2px solid var(--line-2); border-bottom: 2px solid var(--line-2); }
-    .slot.red { border-left: none; }
+    .bounty-grid { grid-template-columns: 1fr; }
+    .cta .inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 720px) {
+    .bounty-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -534,107 +404,107 @@
   <div class="inner">
     <div class="brand">
       <img src="logo.png" alt="PUMPROYALE" />
-      <div class="name">$PUMPROYALE</div>
+      <div class="name">PUMPROYALE</div>
     </div>
     <div class="links">
-      <a href="#duels" class="duel-tab"><span class="vs">VS</span> LIVE DUELS</a>
       <a href="#bounties">BOUNTIES</a>
       <a href="#how">HOW IT WORKS</a>
-      <a href="#rules">RULES</a>
+      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">DASHBOARD</a>
+      <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">X</a>
     </div>
-    <div class="nav-actions">
-      <button class="btn-connect" onclick="openWalletModal()">Connect Wallet</button>
-      <a class="btn-buy" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">Buy $PUMPROYALE</a>
-    </div>
+    <button class="select-wallet" onclick="openWalletModal()">SELECT WALLET</button>
   </div>
 </nav>
 
+<!-- TICKER -->
+<div class="ticker">
+  <div class="track">
+    <span class="item">beat the shit out of someone</span> <span class="sol">5 SOL</span><span class="sep">///</span>
+    <span class="item">break a car mirror</span> <span class="sol blue">8 SOL</span><span class="sep">///</span>
+    <span class="item">scream the ticker out loud at night</span> <span class="sol">2 SOL</span><span class="sep">///</span>
+    <span class="item">streak the knicks game</span> <span class="sol blue">100 SOL</span><span class="sep">///</span>
+    <span class="item">eat a ghost pepper live</span> <span class="sol">15 SOL</span><span class="sep">///</span>
+    <span class="item">ice bath shiver-off</span> <span class="sol blue">30 SOL</span><span class="sep">///</span>
+    <!-- duplicate for loop -->
+    <span class="item">beat the shit out of someone</span> <span class="sol">5 SOL</span><span class="sep">///</span>
+    <span class="item">break a car mirror</span> <span class="sol blue">8 SOL</span><span class="sep">///</span>
+    <span class="item">scream the ticker out loud at night</span> <span class="sol">2 SOL</span><span class="sep">///</span>
+    <span class="item">streak the knicks game</span> <span class="sol blue">100 SOL</span><span class="sep">///</span>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <span class="side-tag blue"><span class="dot"></span>SLOT 1 · BLUE</span>
-        <div class="hero-side-title display blue">CHALLENGER</div>
-        <div class="hero-side-sub">Pick the bounty.<br/>Press record.</div>
-      </div>
-      <div class="hero-right">
-        <span class="side-tag red"><span class="dot"></span>SLOT 2 · RED</span>
-        <div class="hero-side-title display red">RIVAL</div>
-        <div class="hero-side-sub">Same task. Faster clock.<br/>Take the pot.</div>
+  <div class="container inner">
+    <div>
+      <h1>1v1 video bounties. <span class="b">Fastest film wins.</span> Loser eats dirt.</h1>
+      <p class="sub">PUMPROYALE is the duel clash of the bounties. Two slots per bounty — blue vs red. Pick a task, ante your SOL, race to upload the proof. <strong>Winner takes all.</strong></p>
+      <div class="actions">
+        <a class="btn" href="#bounties">Enter the Arena</a>
+        <button class="btn outline" onclick="openWalletModal()">Connect Wallet</button>
       </div>
     </div>
+    <div class="hero-card">
+      <div class="top">
+        <div class="av"><img src="logo.png" alt="" /></div>
+        <div>
+          <div class="label">⚔ LIVE DUELS</div>
+          <div class="h">Two slots. One pot. Fastest film eats.</div>
+        </div>
+      </div>
+      <div class="head-row">ACTIVE BOUNTIES · 24H CAP</div>
+      <div class="row"><span>streak the knicks game</span><span class="sol blue">100 SOL</span></div>
+      <div class="row"><span>break a car mirror</span><span class="sol red">8 SOL</span></div>
+      <div class="row"><span>beat the shit out of someone</span><span class="sol blue">5 SOL</span></div>
+      <div class="row"><span>scream the ticker at night</span><span class="sol red">2 SOL</span></div>
+    </div>
+  </div>
+</section>
 
-    <div class="hero-center">
-      <h1 class="hero-h1 display">
-        <span class="word-1">DUEL.</span><span class="word-vs">vs</span><span class="word-2">EARN.</span>
-      </h1>
-      <p class="hero-sub">
-        The clash of the bounties. Two streamers, one absurd task — film yourself <strong>throwing a hair dryer out the window</strong>, drinking a gallon of milk, doing 100 pushups. Fastest finished video takes <strong>100% of the SOL</strong>. The loser gets nothing.
-      </p>
-      <div class="hero-cta">
-        <a class="cta-primary" href="#bounties">⚔ Enter the Arena</a>
-        <button class="cta-secondary" onclick="openWalletModal()">Connect Wallet</button>
+<!-- LORE -->
+<section class="lore">
+  <div class="container grid">
+    <div class="lore-title">
+      <div class="kicker">THE LORE</div>
+      <h2>Why we made this</h2>
+    </div>
+    <div class="lore-body">
+      <div class="top-box">
+        Bounty boards reward edited clips. Streams get attention but no rewards. We wanted a platform where <span class="em">every task is a 1v1 duel</span>, both duelists ante SOL into escrow, and the <span class="em">fastest valid video proof takes the entire pot.</span> No team votes, no edits, no participation trophies.
+      </div>
+      <div class="row-2">
+        <div class="box">
+          <div class="k blue">PROBLEM</div>
+          <p>Solo bounty boards reward edited clips. There's no urgency, no opponent, no skin in the game. Anyone can take 4 weeks to film a "best take."</p>
+        </div>
+        <div class="box">
+          <div class="k red">ANSWER</div>
+          <p>Two slots, two antes, one clock. Both duelists lock SOL in escrow. First valid single-take video wins the pot — loser walks empty.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="track">
-    <span class="item blue">CHALLENGER WINS</span><span class="sep">⚔</span>
-    <span class="item gold">+48 SOL</span><span class="sep">///</span>
-    <span class="item red">RIVAL WINS</span><span class="sep">⚔</span>
-    <span class="item gold">+25 SOL</span><span class="sep">///</span>
-    <span class="item">HAIR DRYER OUT THE WINDOW</span><span class="sep">///</span>
-    <span class="item gold">12 SOL POT</span><span class="sep">///</span>
-    <span class="item">ICE BATH SHIVER-OFF</span><span class="sep">///</span>
-    <span class="item gold">30 SOL POT</span><span class="sep">///</span>
-    <span class="item">1000 PUSHUPS RACE</span><span class="sep">///</span>
-    <span class="item gold">84 SOL POT</span><span class="sep">///</span>
-    <span class="item blue">SLOT OPEN</span><span class="sep">⚔</span>
-    <span class="item red">SLOT OPEN</span><span class="sep">///</span>
-    <!-- duplicate for seamless -->
-    <span class="item blue">CHALLENGER WINS</span><span class="sep">⚔</span>
-    <span class="item gold">+48 SOL</span><span class="sep">///</span>
-    <span class="item red">RIVAL WINS</span><span class="sep">⚔</span>
-    <span class="item gold">+25 SOL</span><span class="sep">///</span>
-    <span class="item">HAIR DRYER OUT THE WINDOW</span><span class="sep">///</span>
-    <span class="item gold">12 SOL POT</span><span class="sep">///</span>
-    <span class="item">ICE BATH SHIVER-OFF</span><span class="sep">///</span>
-    <span class="item gold">30 SOL POT</span><span class="sep">///</span>
-  </div>
-</div>
-
 <!-- HOW IT WORKS -->
 <section class="how" id="how">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">How it works</span>
-      <h2 class="display">PICK · DUEL · FILM · WIN</h2>
-      <p>Every bounty is a 1v1 duel. Two slots — blue and red. First to upload a valid completion video takes the entire pot.</p>
+    <div class="head">
+      <h2>How it works</h2>
+      <a class="start-btn" href="#bounties">START →</a>
     </div>
     <div class="steps">
       <div class="step">
-        <div class="num">01</div>
-        <h3>PICK YOUR BOUNTY</h3>
-        <p>Browse open duels below. Every bounty has a SOL pot and a slot waiting for a challenger.</p>
+        <div class="num">1</div>
+        <h3>Pick a bounty &amp; claim a slot (blue or red). Lock in your SOL ante.</h3>
       </div>
       <div class="step">
-        <div class="num">02</div>
-        <h3>LOCK YOUR SLOT</h3>
-        <p>Connect wallet, ante in. Your SOL gets escrowed in the smart contract until a winner is declared.</p>
+        <div class="num">2</div>
+        <h3>Film yourself completing the task — single take, no edits, no cuts.</h3>
       </div>
       <div class="step">
-        <div class="num">03</div>
-        <h3>FILM IT</h3>
-        <p>Record a single-take video of you completing the bounty — no edits, no cuts, no trickery.</p>
-      </div>
-      <div class="step">
-        <div class="num">04</div>
-        <h3>FASTEST WINS</h3>
-        <p>First valid submission with the lowest clock-time wins the full pot. Loser walks empty.</p>
+        <div class="num">3</div>
+        <h3>Fastest valid video on-chain wins the full pot. Loser gets nothing.</h3>
       </div>
     </div>
   </div>
@@ -643,50 +513,44 @@
 <!-- BOUNTIES -->
 <section class="bounties" id="bounties">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">⚔ Live Duels</span>
-      <h2 class="display">OPEN BOUNTIES</h2>
-      <p>Two slots per duel. Claim a slot, lock in your SOL, race to upload your video.</p>
+    <div class="head">
+      <h2>Bounties</h2>
+      <a class="view-all" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">View All</a>
     </div>
+
+    <div class="filters">
+      <input type="text" id="bountySearch" placeholder="Search title or ticker" />
+      <select>
+        <option>All status</option>
+        <option>Open slots</option>
+        <option>Duel live</option>
+      </select>
+      <select>
+        <option>All rewards</option>
+        <option>1+ SOL</option>
+        <option>10+ SOL</option>
+        <option>50+ SOL</option>
+      </select>
+      <select>
+        <option>Newest</option>
+        <option>Highest reward</option>
+        <option>Ending soonest</option>
+      </select>
+    </div>
+
     <div class="bounty-grid" id="bountyGrid"></div>
   </div>
 </section>
 
-<!-- RULES -->
-<section class="rules-strip" id="rules">
-  <div class="container rules-grid">
-    <div class="rule">
-      <div class="ico">🎬</div>
-      <h4>SINGLE-TAKE VIDEO</h4>
-      <p>One continuous shot. No cuts, no edits, no stitched clips.</p>
+<!-- CTA -->
+<section class="cta">
+  <div class="container inner">
+    <div>
+      <div class="kicker">$PUMPROYALE</div>
+      <h2>Two slots. One pot. Loser walks empty.</h2>
+      <div class="ca">CA: E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump</div>
     </div>
-    <div class="rule">
-      <div class="ico">⏱️</div>
-      <h4>FASTEST CLOCK WINS</h4>
-      <p>Both videos timestamped on-chain. Lowest valid time eats the pot.</p>
-    </div>
-    <div class="rule">
-      <div class="ico">🔒</div>
-      <h4>ESCROWED SOL</h4>
-      <p>Both antes locked in escrow before the duel starts. No backsies.</p>
-    </div>
-    <div class="rule">
-      <div class="ico">💀</div>
-      <h4>LOSER GETS NOTHING</h4>
-      <p>Winner takes 100%. Forfeit, no-show, or invalid video = your ante is gone.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="container">
-    <h2 class="display"><span class="blue">CHOOSE YOUR SIDE.</span><br/><span class="red">CLAIM THE POT.</span></h2>
-    <p>The arena is open. The slots are filling. Lock in before someone else does.</p>
-    <div class="hero-cta">
-      <a class="cta-primary" href="#bounties">⚔ Enter Now</a>
-      <a class="cta-secondary" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">Buy $PUMPROYALE</a>
-    </div>
+    <a class="launch" href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">BUY ON PUMP.FUN →</a>
   </div>
 </section>
 
@@ -695,7 +559,7 @@
   <div class="container inner">
     <div class="left">
       <img src="logo.png" alt="" />
-      <span>$PUMPROYALE © 2026 · the duel clash of the bounties</span>
+      <span>$PUMPROYALE © 2026 · duel. film. eat.</span>
     </div>
     <div class="right">
       <a href="https://pump.fun/coin/E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump" target="_blank" rel="noopener">X / Twitter</a>
@@ -708,8 +572,8 @@
 <!-- WALLET MODAL -->
 <div class="wallet-modal-bg" id="walletModal" onclick="if(event.target===this)closeWalletModal()">
   <div class="wallet-modal">
-    <h3 class="display">CONNECT WALLET</h3>
-    <p>Connect a Solana wallet to lock in a slot and ante up.</p>
+    <h3>Connect Wallet</h3>
+    <p>Connect a Solana wallet to claim a duel slot and ante your SOL into escrow.</p>
     <div class="wlist">
       <button onclick="connectWallet('Phantom')">Phantom <span>👻</span></button>
       <button onclick="connectWallet('Solflare')">Solflare <span>🔥</span></button>
@@ -721,117 +585,124 @@
 </div>
 
 <script>
-  // ===== BOUNTIES =====
+  const CA = "E7bUSwTC5q3VPHdZKQtta5eJQrzTcy4v2fzsaU42pump";
+
   const BOUNTIES = [
     {
-      title: "Hair Dryer Out The Window",
-      desc: "Throw a working hair dryer out a 2nd-story+ window. Must show plug-in shot first, full toss in single take.",
-      pot: 12, unit: "SOL",
-      blue: { name: "pumprince", handle: "@7aP…4Yb1", taken: true },
-      red: { taken: false },
-      countdown: "12h 14m left",
+      title: "beat the shit out of someone",
+      desc: "preferably a rugger",
+      img: "https://images.unsplash.com/photo-1547005403-9c0fa90d2bd5?w=900&q=70&auto=format&fit=crop",
+      imgFallback: null,
+      prize: 5, clock: "1302d 19h left",
+      wallet: "Hdby...r4u1",
+      proofs: 1,
+      blueTaken: true, redTaken: false,
+      status: "open"
     },
     {
-      title: "Ice Bath Shiver-Off",
-      desc: "Submerge to the neck in an ice bath. First duelist to visible uncontrolled shivers wins the pot.",
-      pot: 30, unit: "SOL",
-      blue: { name: "frozenchad", handle: "@2zN…J19q", taken: true },
-      red: { name: "tundra_jr", handle: "@9kL…X02m", taken: true },
-      countdown: "06h 41m left",
+      title: "break a car mirror",
+      desc: "side mirror counts. one continuous take. show the car first.",
+      img: "assets/car-mirror.avif",
+      prize: 8, clock: "1302d 19h left",
+      wallet: "53kR...24Xx",
+      proofs: 0,
+      blueTaken: false, redTaken: false,
+      status: "open"
     },
     {
-      title: "1000 Pushups Race",
-      desc: "Continuous pushups, no rest longer than 5s. First to 1000 on the timer takes the pot.",
-      pot: 84, unit: "SOL",
-      blue: { taken: false },
-      red: { name: "repzilla", handle: "@9aP…7Yb1", taken: true },
-      countdown: "23h 02m left",
+      title: "scream the ticker out loud at night",
+      desc: "between 11pm and 4am. public street. shout '$PUMPROYALE' clearly. neighbours optional.",
+      img: "assets/scream.png",
+      prize: 2, clock: "1302d 19h left",
+      wallet: "53kR...24Xx",
+      proofs: 0,
+      blueTaken: true, redTaken: true,
+      status: "dueling"
     },
     {
-      title: "Eat A Ghost Pepper",
-      desc: "Whole pepper. No water. 60 seconds before chasing. Fastest finish wins.",
-      pot: 18, unit: "SOL",
-      blue: { taken: false },
-      red: { taken: false },
-      countdown: "Slots open",
+      title: "streak the knicks game",
+      desc: "Madison Square Garden. on camera. don't get arrested before the toss.",
+      img: "assets/knicks.jpg",
+      prize: 100, clock: "1302d 19h left",
+      wallet: "53kR...24Xx",
+      proofs: 0,
+      blueTaken: false, redTaken: true,
+      status: "open"
     },
     {
-      title: "Cold Call 50 Strangers",
-      desc: "50 cold calls, screen-recorded. First to complete the full 50 with each ≥10s wins.",
-      pot: 25, unit: "SOL",
-      blue: { name: "dial_demon", handle: "@53kR…24Xx", taken: true },
-      red: { taken: false },
-      countdown: "18h 22m left",
+      title: "eat a ghost pepper live",
+      desc: "whole pepper. no water. 60 seconds before chasing.",
+      img: "https://images.unsplash.com/photo-1583395145269-3ee01a25f1de?w=900&q=70&auto=format&fit=crop",
+      prize: 15, clock: "1302d 19h left",
+      wallet: "9aP...7Yb1",
+      proofs: 0,
+      blueTaken: false, redTaken: false,
+      status: "open"
     },
     {
-      title: "Gallon of Milk in 1 Hour",
-      desc: "Full gallon, single take, no spilling. First to finish without throwing up wins.",
-      pot: 9.99, unit: "SOL",
-      blue: { taken: false },
-      red: { taken: false },
-      countdown: "Slots open",
+      title: "ice bath shiver-off",
+      desc: "submerge to neck. first visible uncontrolled shivers wins.",
+      img: "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?w=900&q=70&auto=format&fit=crop",
+      prize: 30, clock: "1302d 19h left",
+      wallet: "2zN...J19q",
+      proofs: 0,
+      blueTaken: true, redTaken: true,
+      status: "dueling"
     },
   ];
 
-  function slotHTML(side, slot) {
-    if (slot.taken) {
-      return `
-        <div class="slot ${side}">
-          <div>
-            <div class="slot-label">${side === 'blue' ? 'CHALLENGER · BLUE' : 'RIVAL · RED'}</div>
-            <div class="slot-name">${slot.name}</div>
-            <div class="slot-handle">${slot.handle}</div>
-          </div>
-          <span class="slot-join" style="opacity:0.5;cursor:default;border-style:dashed;">LOCKED IN</span>
-        </div>
-      `;
-    }
-    return `
-      <div class="slot ${side} open">
-        <div>
-          <div class="slot-label">${side === 'blue' ? 'CHALLENGER · BLUE' : 'RIVAL · RED'}</div>
-          <div class="slot-name">SLOT OPEN</div>
-          <div class="slot-handle">Waiting for duelist</div>
-        </div>
-        <button class="slot-join" onclick="openWalletModal()">⚔ Take Slot</button>
-      </div>
-    `;
+  function caShort(ca) {
+    return "$" + ca.slice(0, 26).toUpperCase();
   }
 
-  function renderBounties() {
+  function slotLabel(taken, side) {
+    if (taken) return (side === 'blue' ? 'BLUE LOCKED' : 'RED LOCKED');
+    return (side === 'blue' ? 'BLUE OPEN' : 'RED OPEN');
+  }
+
+  function renderBounties(filter = '') {
+    const q = filter.trim().toLowerCase();
     const grid = document.getElementById('bountyGrid');
-    grid.innerHTML = BOUNTIES.map(b => `
+    const items = BOUNTIES.filter(b => !q || b.title.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q));
+    if (items.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--ink-3);font-weight:700;">No bounties match.</div>';
+      return;
+    }
+    grid.innerHTML = items.map(b => `
       <article class="bounty">
-        <div class="bounty-top">
-          ${slotHTML('blue', b.blue)}
-          <div class="vs-badge"><span>VS</span></div>
-          ${slotHTML('red', b.red)}
+        <div class="ca-bar">
+          <span class="ca">${caShort(CA)}</span>
+          <span class="open-tag ${b.status === 'dueling' ? 'dueling' : ''}">${b.status === 'dueling' ? 'DUEL LIVE' : 'OPEN'}</span>
         </div>
-        <div class="bounty-body">
-          <h3 class="bounty-title">${b.title}</h3>
-          <p class="bounty-desc">${b.desc}</p>
-          <div class="video-rules"><span class="cam">▶</span> Video proof · single take · no edits</div>
+        <div class="thumb">
+          <img src="${b.img}" alt="" loading="lazy" onerror="this.style.background='#222';this.style.display='block';this.style.opacity='0.4';" />
         </div>
-        <div class="prize-bar">
-          <div>
-            <div class="prize-l">Total Pot</div>
-            <div class="prize-amt">${b.pot}<span class="unit">${b.unit}</span></div>
-          </div>
-          <div class="winner-tag">
-            <strong>Winner takes all</strong>
-            Loser gets nothing
-          </div>
+        <div class="slot-strip">
+          <div class="blue ${b.blueTaken ? '' : 'open'}">${slotLabel(b.blueTaken, 'blue')}</div>
+          <div class="vs">VS</div>
+          <div class="red ${b.redTaken ? '' : 'open'}">${slotLabel(b.redTaken, 'red')}</div>
         </div>
-        <div class="bounty-foot">
-          <span class="status"><span class="dot"></span>LIVE BOUNTY</span>
-          <span class="countdown">${b.countdown}</span>
+        <div class="meta">
+          <div class="small-row"><span>SOL REWARD</span><span>${b.proofs} PROOFS</span></div>
+          <h3>${b.title}</h3>
+          <p class="desc">${b.desc}</p>
+        </div>
+        <div class="stats">
+          <div class="b"><div class="l">PRIZE</div><div class="v">${b.prize} SOL</div></div>
+          <div class="b"><div class="l">CLOCK</div><div class="v">${b.clock}</div></div>
+        </div>
+        <div class="foot">
+          <span class="wallet">${b.wallet}</span>
+          <button class="go" onclick="openWalletModal()">VIEW BOUNTY</button>
         </div>
       </article>
     `).join('');
   }
-  renderBounties();
 
-  // ===== Wallet modal =====
+  renderBounties();
+  document.getElementById('bountySearch').addEventListener('input', e => renderBounties(e.target.value));
+
+  // Wallet modal
   function openWalletModal() { document.getElementById('walletModal').classList.add('open'); }
   function closeWalletModal() { document.getElementById('walletModal').classList.remove('open'); }
   async function connectWallet(name) {
@@ -839,8 +710,8 @@
       if (name === 'Phantom' && window.solana && window.solana.isPhantom) {
         const r = await window.solana.connect();
         const pk = r.publicKey.toString();
-        const short = pk.slice(0, 4) + '…' + pk.slice(-4);
-        document.querySelectorAll('.btn-connect').forEach(b => b.textContent = short);
+        const short = pk.slice(0,4) + '...' + pk.slice(-4);
+        document.querySelector('.select-wallet').textContent = short;
         closeWalletModal();
         return;
       }
